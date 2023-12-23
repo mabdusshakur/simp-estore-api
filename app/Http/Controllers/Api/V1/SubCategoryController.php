@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SubCategoryResource;
-use App\Models\SubCategory;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 
@@ -31,7 +32,22 @@ class SubCategoryController extends Controller
      */
     public function store(StoreSubCategoryRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            $subCategory = SubCategory::create([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'category_id' => $request->category_id,
+            ]);
+            return new SubCategoryResource([$subCategory, 'status' => 'success' ,'message' => 'SubCategory created successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
