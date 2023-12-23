@@ -13,8 +13,8 @@ Route::group(['prefix' => 'v1'], function () {
 
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
-            Route::apiResource('categories', \App\Http\Controllers\Api\V1\CategoryController::class);
-            Route::apiResource('categories', \App\Http\Controllers\Api\V1\CategoryController::class);
+            Route::apiResource('categories', \App\Http\Controllers\Api\v1\CategoryController::class);
+            Route::apiResource('sub-categories', \App\Http\Controllers\Api\v1\SubCategoryController::class);
         });
     });
 });
