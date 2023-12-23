@@ -62,7 +62,8 @@ class AuthController extends Controller
     {
         try {
             $validatedData = Validator::make($request->all(), [
-                'email' => 'required|string|email',
+                'email' => 'sometimes|required_without:phone_number|string|email',
+                'phone_number' => 'sometimes|required_without:email|numeric',
                 'password' => 'required|string|min:8',
             ]);
 
@@ -75,7 +76,9 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if (!Auth::attempt($request->only('email', 'password'))) {
+            $credentials = $request->only('email', 'phone_number', 'password');
+
+            if (!Auth::attempt($credentials)) {
                 return response()->json([
                     'data' => [
                         'status' => 'error',
