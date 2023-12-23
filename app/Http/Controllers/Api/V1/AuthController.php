@@ -7,59 +7,97 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'phone_number' => 'required|numeric|unique:users,phone',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|string',
+                'email' => 'required|string|email|unique:users,email',
+                'phone_number' => 'required|numeric|unique:users,phone',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email, 
-            'phone_number' => $request->phone_number,
-            'password' => Hash::make($request->password),
-        ]);
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'data' => [
+                        'status' => 'error',
+                        'message' => $validatedData->errors(),
+                    ],
+                ], 401);
+            }
 
-        $token = $user->createToken('registerToken')->plainTextToken;
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'password' => Hash::make($request->password),
+            ]);
 
-        return response()->json([
-            'data' => [
-                'status' => 'success',
-                'message' => 'User created successfully',
-                'user' => $user,
-                'token' => $token,
-                'token_type' => 'Bearer',
-            ],
-        ], 201);
+            $token = $user->createToken('registerToken')->plainTextToken;
+
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'User created successfully',
+                    'user' => $user,
+                    'token' => $token,
+                    'token_type' => 'Bearer',
+                ],
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     public function login(Request $request)
     {
-        $validatedData = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:8',
-        ]);
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'email' => 'required|string|email',
+                'password' => 'required|string|min:8',
+            ]);
 
-        if (!Auth::attempt($validatedData)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            if ($validatedData->fails()) {
+                return response()->json([
+                    'data' => [
+                        'status' => 'error',
+                        'message' => $validatedData->errors(),
+                    ],
+                ], 401);
+            }
+
+            if (!Auth::attempt($validatedData)) {
+                return response()->json(['message' => 'Invalid credentials'], 401);
+            }
+
+            $user = $request->user();
+            $token = $user->createToken('loginToken')->plainTextToken;
+
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'user' => $user,
+                    'token' => $token,
+                    'token_type' => 'Bearer',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
         }
 
-        $user = $request->user();
-        $token = $user->createToken('loginToken')->plainTextToken;
-
-        return response()->json([
-            'data' => [
-                'status' => 'success',
-                'user' => $user,
-                'token' => $token,
-                'token_type' => 'Bearer',
-            ],
-        ], 200);
     }
 }
