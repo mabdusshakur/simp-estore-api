@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 150);
             $table->string('email')->unique();
             $table->string('phone_number', 20)->unique();
+            $table->boolean('is_admin')->default(false);
+            $table->string('avatar')->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
             $table->string('city')->nullable();
