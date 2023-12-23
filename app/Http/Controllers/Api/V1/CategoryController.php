@@ -86,6 +86,21 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'Category deleted successfully',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 }
