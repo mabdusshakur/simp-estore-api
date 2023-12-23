@@ -53,7 +53,16 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        try {
+            return new CategoryResource($category);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
