@@ -10,5 +10,9 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+        // Admin routes
+        Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+        });
     });
 });
