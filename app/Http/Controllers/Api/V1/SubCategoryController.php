@@ -39,7 +39,7 @@ class SubCategoryController extends Controller
                 'slug' => Str::slug($request->name),
                 'category_id' => $request->category_id,
             ]);
-            return new SubCategoryResource([$subCategory, 'status' => 'success' ,'message' => 'SubCategory created successfully']);
+            return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'SubCategory created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
                 'data' => [
@@ -80,7 +80,22 @@ class SubCategoryController extends Controller
      */
     public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
     {
-        //
+        $request->validated();
+        try {
+            $subCategory->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'category_id' => $request->category_id,
+            ]);
+            return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'Category updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
