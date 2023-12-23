@@ -38,7 +38,7 @@ class CategoryController extends Controller
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
             ]);
-            return new CategoryResource($category);
+            return new CategoryResource([$category, 'message' => 'Category created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
                 'data' => [
