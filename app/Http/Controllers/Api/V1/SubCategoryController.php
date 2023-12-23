@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SubCategoryResource;
 use App\Models\SubCategory;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
@@ -14,7 +15,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return SubCategoryResource::collection(SubCategory::all());
     }
 
     /**
