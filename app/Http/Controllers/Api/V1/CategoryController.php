@@ -78,7 +78,21 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $request->validated();
+        try {
+            $category->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+            ]);
+            return new CategoryResource([$category, 'message' => 'Category updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
