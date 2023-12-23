@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -31,9 +32,22 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $request->validated();
+        try {
+            $category = Category::create([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+            ]);
+            return new CategoryResource($category);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
-
     /**
      * Display the specified resource.
      */
