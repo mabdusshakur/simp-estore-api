@@ -19,6 +19,8 @@ class CategoryController extends Controller
     {
         $categories = Category::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->search}%");
+        })->when($request->sort, function ($query) use ($request) {
+            $query->orderBy($request->sort, $request->order);
         })->get();
 
         return CategoryResource::collection($categories);
