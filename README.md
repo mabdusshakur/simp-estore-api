@@ -1,6 +1,6 @@
 # Simple Ecommerce API
 
-This is a Simple Ecommerce REST-API project built with Laravel. It provides a backend RESTful API for managing products, orders, customers, and user management for an ecommerce store. It also includes features such as email notifications for order status and registration, category and subcategory management, and integration with Stripe payment gateway.
+This is a Simple Ecommerce REST-API project built with Laravel. It provides a backend RESTful API for managing products, orders, and user management for an ecommerce store. It also includes features such as email notifications for order status and registration, category and subcategory management, and integration with Stripe payment gateway.
 
 ## Features
 
