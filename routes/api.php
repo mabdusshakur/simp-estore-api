@@ -15,6 +15,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::apiResource('categories', \App\Http\Controllers\Api\v1\CategoryController::class);
             Route::apiResource('sub-categories', \App\Http\Controllers\Api\v1\SubCategoryController::class);
+            Route::apiResource('products', \App\Http\Controllers\Api\v1\ProductController::class);
         });
     });
 });
