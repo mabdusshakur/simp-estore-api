@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'sale_price' => 'nullable|numeric',
             'category_id' => 'required|exists:categories,id',
             'subcategory_id' => 'required|exists:sub_categories,id',
-            'status' => 'required|boolean',
+            'status' => 'required',
             'stock' => 'required|integer',
         ];
     }
