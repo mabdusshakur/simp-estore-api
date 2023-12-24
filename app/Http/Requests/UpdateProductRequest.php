@@ -26,7 +26,6 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => ['required', 'string', 'max:255', Rule::unique('products')->ignore($this->products, 'id')],
             'description' => 'required|string',
             'regular_price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
