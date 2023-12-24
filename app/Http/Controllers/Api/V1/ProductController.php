@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -45,6 +46,7 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'stock' => $request->stock,
             ]);
+            Category::where('id', $request->category_id)->increment('product_count', 1);
             return new ProductResource([$product, 'status' => 'success', 'message' => 'Product created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
