@@ -21,7 +21,7 @@ class SubCategoryController extends Controller
             $query->where('name', 'like', "%{$request->search}%");
         })->when($request->sort, function ($query) use ($request) {
             $query->orderBy($request->sort, $request->order);
-        })->get();
+        })->paginate($request->paginate ?? 10);
         return SubCategoryResource::collection($subcategories);
     }
 
