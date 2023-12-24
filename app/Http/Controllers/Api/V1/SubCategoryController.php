@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -45,6 +46,7 @@ class SubCategoryController extends Controller
                 'slug' => Str::slug($request->name),
                 'category_id' => $request->category_id,
             ]);
+            Category::where('id', $request->category_id)->increment('sub_categories_count', 1);
             return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'SubCategory created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
