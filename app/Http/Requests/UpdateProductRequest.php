@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -22,7 +25,25 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'slug' => ['required', 'string', 'max:255', Rule::unique('products')->ignore($this->products, 'id')],
+            'description' => 'required|string',
+            'regular_price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:sub_categories,id',
+            'status' => 'required|boolean',
+            'stock' => 'required|integer',
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'data' => [
+                'status' => 'error',
+                'message' => $validator->errors(),
+            ],
+        ], 401));
     }
 }
