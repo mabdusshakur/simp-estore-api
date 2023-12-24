@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -36,6 +38,13 @@ class AuthController extends Controller
                 'phone_number' => $request->phone_number,
                 'password' => Hash::make($request->password),
             ]);
+
+            // Send welcome email
+            Mail::to($user->email)->send(new WelcomeMail([
+                'subject' => 'Welcome to ' . config('app.name'),
+                'company_name' => config('app.name'),
+                'name' => $user->name,
+            ]));
 
             $token = $user->createToken('registerToken')->plainTextToken;
 
