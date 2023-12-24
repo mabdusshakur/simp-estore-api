@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SubCategoryResource;
@@ -14,9 +15,12 @@ class SubCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return SubCategoryResource::collection(SubCategory::all());
+        $subcategories = SubCategory::when($request->search, function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%");
+        })->get();
+        return SubCategoryResource::collection($subcategories);
     }
 
     /**
