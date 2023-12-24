@@ -21,6 +21,8 @@ class ProductController extends Controller
     {
         $products = Product::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->search}%")->orWhere('description', 'like', "%{$request->search}%");
+        })->when($request->sort, function ($query) use ($request) {
+            $query->orderBy($request->sort, $request->order);
         })->get();
 
         return ProductResource::collection($products);
