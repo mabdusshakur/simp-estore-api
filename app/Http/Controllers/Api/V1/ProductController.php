@@ -10,15 +10,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ProductResource::collection(Product::all());
+        $products = Product::when($request->search, function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%")->orWhere('description', 'like', "%{$request->search}%");
+        })->get();
+
+        return ProductResource::collection($products);
     }
 
     /**
