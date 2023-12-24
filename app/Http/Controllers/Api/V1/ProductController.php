@@ -120,6 +120,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
+            Category::where('id', $product->category_id)->decrement('product_count', 1);
+            SubCategory::where('id', $product->subcategory_id)->decrement('product_count', 1);
             $product->delete();
             return response()->json([
                 'data' => [
