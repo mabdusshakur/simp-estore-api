@@ -61,7 +61,16 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        try {
+            return new ProductResource($product);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
