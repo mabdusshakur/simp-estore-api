@@ -112,6 +112,7 @@ class SubCategoryController extends Controller
     public function destroy(SubCategory $subCategory)
     {
         try {
+            Category::where('id', $subCategory->category_id)->decrement('sub_categories_count', 1);
             $subCategory->delete();
             return response()->json([
                 'data' => [
