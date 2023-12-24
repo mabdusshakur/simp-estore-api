@@ -86,7 +86,28 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        try {
+            $request->validated();
+            $product->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'description' => $request->description,
+                'regular_price' => $request->regular_price,
+                'sale_price' => $request->sale_price,
+                'category_id' => $request->category_id,
+                'subcategory_id' => $request->subcategory_id,
+                'status' => $request->status,
+                'stock' => $request->stock,
+            ]);
+            return new ProductResource([$product, 'status' => 'success', 'message' => 'Product updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
