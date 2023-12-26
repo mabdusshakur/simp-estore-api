@@ -31,7 +31,21 @@ class WishlistController extends Controller
      */
     public function store(StoreWishlistRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            $wishlist = Wishlist::create([
+                'user_id' => $request->user_id,
+                'product_id' => $request->product_id,
+            ]);
+            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => 'Wishlist created successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
