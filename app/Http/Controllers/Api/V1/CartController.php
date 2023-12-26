@@ -108,4 +108,27 @@ class CartController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Remove all wishlist
+     */
+    public function destroyAll()
+    {
+        try {
+            Cart::where('user_id', auth()->user()->id)->delete();
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'Cart emptied successfully',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
+    }
 }
