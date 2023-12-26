@@ -12,6 +12,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
+        Route::post('wishlists/destroy-all', [\App\Http\Controllers\Api\v1\WishlistController::class, 'destroyAll']);
 
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
