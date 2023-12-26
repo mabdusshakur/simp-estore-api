@@ -103,4 +103,28 @@ class WishlistController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Remove all wishlist
+     */
+
+    public function destroyAll()
+    {
+        try {
+            Wishlist::where('user_id', auth()->user()->id)->delete();
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'All wishlist deleted successfully',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
+    }
 }
