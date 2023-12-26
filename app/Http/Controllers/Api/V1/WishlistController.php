@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Resources\WishlistResource;
 use App\Models\Wishlist;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWishlistRequest;
@@ -14,7 +15,7 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        return WishlistResource::collection(Wishlist::all());
     }
 
     /**
