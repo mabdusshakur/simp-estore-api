@@ -14,6 +14,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
         Route::post('wishlists/destroy-all', [\App\Http\Controllers\Api\v1\WishlistController::class, 'destroyAll']);
 
+        Route::apiResource('carts', \App\Http\Controllers\Api\v1\CartController::class);
+
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::apiResource('categories', \App\Http\Controllers\Api\v1\CategoryController::class);
