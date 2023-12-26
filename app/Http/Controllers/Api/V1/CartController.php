@@ -91,6 +91,21 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        try {
+            $cart->delete();
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'Cart deleted successfully',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 }
