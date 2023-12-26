@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
@@ -14,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        return CartResource::collection(Cart::where('user_id', auth()->user()->id)->get());
     }
 
     /**
