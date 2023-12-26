@@ -15,7 +15,7 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        return WishlistResource::collection(Wishlist::all());
+        return WishlistResource::collection(Wishlist::where('user_id', auth()->user()->id)->get());
     }
 
     /**
