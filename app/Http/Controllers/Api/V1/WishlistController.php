@@ -34,7 +34,7 @@ class WishlistController extends Controller
         try {
             $request->validated();
             $wishlist = Wishlist::create([
-                'user_id' => $request->user_id,
+                'user_id' => auth()->user()->id,
                 'product_id' => $request->product_id,
             ]);
             return new WishlistResource([$wishlist, 'status' => 'success', 'message' => 'Wishlist created successfully']);
