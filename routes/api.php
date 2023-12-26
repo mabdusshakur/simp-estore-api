@@ -11,6 +11,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+        Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
+
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::apiResource('categories', \App\Http\Controllers\Api\v1\CategoryController::class);
