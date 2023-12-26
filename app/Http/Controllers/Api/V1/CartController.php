@@ -70,7 +70,20 @@ class CartController extends Controller
      */
     public function update(UpdateCartRequest $request, Cart $cart)
     {
-        //
+        try {
+            $request->validated();
+            $cart->update([
+                'quantity' => $request->quantity,
+            ]);
+            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
