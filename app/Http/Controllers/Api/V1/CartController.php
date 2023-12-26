@@ -31,7 +31,22 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            $cart = Cart::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+            ]);
+            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart created successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
