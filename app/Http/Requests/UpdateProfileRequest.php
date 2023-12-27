@@ -31,6 +31,7 @@ class UpdateProfileRequest extends FormRequest
             'address_1' => 'sometimes|required|string|max:255',
             'address_2' => 'sometimes|required|string|max:255',
             'city' => 'sometimes|required|string|max:255',
+            'country' => 'sometimes|required|numeric|exists:countries,id',
             'postal_code' => 'sometimes|required|numeric',
         ];
     }
