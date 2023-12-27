@@ -32,7 +32,7 @@ class StoreProductRequest extends FormRequest
             'subcategory_id' => 'required|exists:sub_categories,id',
             'status' => 'required|boolean',
             'stock' => 'required|integer',
-            'images' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'images' => 'required'
         ];
     }
 
