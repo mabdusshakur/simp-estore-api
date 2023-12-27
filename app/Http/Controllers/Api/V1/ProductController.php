@@ -11,6 +11,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -54,8 +55,18 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'stock' => $request->stock,
             ]);
-            Category::where('id', $request->category_id)->increment('product_count', 1);
-            SubCategory::where('id', $request->subcategory_id)->increment('product_count', 1);
+            $images = $request->file('images');
+            if($images){
+                foreach ($images as $image) {
+                    $fileName = time() . '-' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                    $filePath = $image->move(public_path('images/product'), $fileName);
+                    $product->images()->create([
+                        'path' => $filePath,
+                    ]);
+                }
+            }
+            Category::where('id', $request->category_id)->increment('products_count', 1);
+            SubCategory::where('id', $request->subcategory_id)->increment('products_count', 1);
             return new ProductResource([$product, 'status' => 'success', 'message' => 'Product created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
