@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\OrderItems;
+use Validator;
 
 class OrderController extends Controller
 {
@@ -19,7 +20,7 @@ class OrderController extends Controller
     {
         if (auth()->user()->role == 'admin') {
             return OrderResource::collection(Order::all());
-        }else{
+        } else {
             return OrderResource::collection(Order::where('user_id', auth()->user()->id)->get());
         }
     }
@@ -45,16 +46,14 @@ class OrderController extends Controller
                 $totalPrice += $cartItem->product->sale_price ?? $cartItem->product->regular_price * $cartItem->quantity;
             }
 
-            if($request->payment_method == 'cod')
-            {
+            if ($request->payment_method == 'cod') {
                 $order = Order::create([
                     'user_id' => auth()->user()->id,
                     'total' => $totalPrice,
                     'status' => $request->status,
                     'payment_method' => $request->payment_method,
                 ]);
-                if($order)
-                {
+                if ($order) {
                     foreach ($cartItems as $cartItem) {
                         $orderItem = new OrderItems();
                         $orderItem->order_id = $order->id;
@@ -75,6 +74,90 @@ class OrderController extends Controller
                             'order' => $order,
                         ],
                     ], 201);
+                }
+            } else if ($request->payment_method == 'stripe') {
+
+                try {
+
+                    $validatedData = Validator::make($request->all(), [
+                        'card_number' => 'required',
+                        'exp_month' => 'required',
+                        'exp_year' => 'required',
+                        'cvc' => 'required',
+                    ]);
+                    if ($validatedData->fails()) {
+                        return response()->json([
+                            'data' => [
+                                'status' => 'error',
+                                'message' => $validatedData->errors()->first(),
+                            ],
+                        ], 400);
+                    }
+
+                    $order = Order::create([
+                        'user_id' => auth()->user()->id,
+                        'total' => $totalPrice,
+                        'status' => $request->status,
+                        'payment_method' => $request->payment_method,
+                    ]);
+                    if ($order) {
+                        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+                        $stripe_card = $stripe->tokens->create([
+                            'card' => [
+                                'number' => $request->card_number,
+                                'exp_month' => $request->exp_month,
+                                'exp_year' => $request->exp_year,
+                                'cvc' => $request->cvc,
+                            ]
+                        ]);
+                        $stripe_response = $stripe->charges->create([
+                            'amount' => $totalPrice * 100,
+                            'currency' => 'usd',
+                            'source' => $stripe_card->id,
+                            'description' => 'Order ID : ' . $order->id . ' User Name : ' . auth()->user()->name . ' User Email : ' . auth()->user()->email . ' User Phone : ' . auth()->user()->phone_number,
+                        ]);
+
+                        if ($stripe_response->status == 'succeeded') {
+                            $order->status = 'completed';
+                            $order->save();
+
+                            foreach ($cartItems as $cartItem) {
+                                $orderItem = new OrderItems();
+                                $orderItem->order_id = $order->id;
+                                $orderItem->product_id = $cartItem->product_id;
+                                $orderItem->quantity = $cartItem->quantity;
+                                $orderItem->price = $cartItem->product->sale_price ?? $cartItem->product->regular_price;
+                                $orderItem->save();
+                                $cartItem->product->stock -= $cartItem->quantity;
+                                $cartItem->product->sold_count += $cartItem->quantity;
+                                $cartItem->product->save();
+                                $cartItem->delete();
+                            }
+
+                            return response()->json([
+                                'data' => [
+                                    'status' => 'success',
+                                    'message' => 'Order created successfully',
+                                    'order' => $order,
+                                ],
+                            ], 201);
+                        } else {
+                            return response()->json([
+                                'data' => [
+                                    'status' => 'error',
+                                    'message' => 'Payment failed',
+                                ],
+                            ], 500);
+                        }
+                    }
+
+                } catch (\Throwable $th) {
+                    return response()->json([
+                        'data' => [
+                            'status' => 'error',
+                            'message' => $th->getMessage(),
+                        ],
+                    ], 500);
                 }
             }
 
