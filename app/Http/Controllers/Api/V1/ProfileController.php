@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -23,6 +24,9 @@ class ProfileController extends Controller
             $user = auth()->user();
 
             if ($request->hasFile('avatar')) {
+                if (File::exists($user->avatar)) {
+                    unlink($user->avatar);
+                }
                 $request->validate(['avatar' => 'required|image|max:2048']);
                 $avatar = $request->file('avatar');
                 $avatarName = time() . '-' . rand(1000, 9999) . '.' . $avatar->getClientOriginalExtension();
