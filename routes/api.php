@@ -11,14 +11,19 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+        //wishlist
         Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
         Route::post('wishlists/destroy-all', [\App\Http\Controllers\Api\v1\WishlistController::class, 'destroyAll']);
 
+        //cart
         Route::apiResource('carts', \App\Http\Controllers\Api\v1\CartController::class);
         Route::post('carts/destroy-all', [\App\Http\Controllers\Api\v1\CartController::class, 'destroyAll']);
-
         Route::post('carts/increment/{cart}', [\App\Http\Controllers\Api\v1\CartController::class, 'increment']);
         Route::post('carts/decrement/{cart}', [\App\Http\Controllers\Api\v1\CartController::class, 'decrement']);
+
+        //product
+        Route::get('products', [\App\Http\Controllers\Api\v1\ProductController::class, 'index']);
+        Route::get('products/{product}', [\App\Http\Controllers\Api\v1\ProductController::class, 'show']);
 
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
