@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\Category;
+use Storage;
+use App\Models\Image;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Http\Request;
-use Storage;
 
 class ProductController extends Controller
 {
@@ -140,6 +142,35 @@ class ProductController extends Controller
                 ],
             ], 500);
         }
+    }
+
+    /**
+     * Delete specific image.
+    */
+
+    public function deleteImage(Request $request)
+    {
+        try {
+            $image = Image::where('id', $request->image_id)->first();
+            if (File::exists($image->path)) {
+                unlink($image->path);
+            }
+            $image->delete();
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'Image deleted successfully',
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
+
     }
 
     /**
