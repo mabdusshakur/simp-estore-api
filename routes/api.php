@@ -29,6 +29,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('profile', [\App\Http\Controllers\Api\v1\ProfileController::class, 'show']);
         Route::post('profile', [\App\Http\Controllers\Api\v1\ProfileController::class, 'update']);
 
+        //Order
+        Route::post('orders', [\App\Http\Controllers\Api\v1\OrderController::class, 'store']);
+        
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::apiResource('categories', \App\Http\Controllers\Api\v1\CategoryController::class);
