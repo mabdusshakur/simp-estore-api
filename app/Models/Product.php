@@ -21,4 +21,9 @@ class Product extends Model
         'view_count',
         'sold_count',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
