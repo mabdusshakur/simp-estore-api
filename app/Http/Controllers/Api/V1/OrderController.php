@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        if (auth()->user()->role == 'admin') {
+            return OrderResource::collection(Order::all());
+        }else{
+            return OrderResource::collection(Order::where('user_id', auth()->user()->id)->get());
+        }
     }
 
     /**
