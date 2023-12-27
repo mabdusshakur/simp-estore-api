@@ -89,7 +89,7 @@ class CartController extends Controller
     /**
      * cart item increment
      */
-    public function increment(Request $request, Cart $cart)
+    public function increment(Cart $cart)
     {
         try {
             $cart->update([
@@ -109,7 +109,7 @@ class CartController extends Controller
     /**
      * cart item decrement
      */
-    public function decrement(Request $request, Cart $cart)
+    public function decrement(Cart $cart)
     {
         try {
             if ($cart->quantity > 1) {
