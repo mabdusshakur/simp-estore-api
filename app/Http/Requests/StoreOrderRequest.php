@@ -27,7 +27,6 @@ class StoreOrderRequest extends FormRequest
             'status' => 'required|string',
             'payment_method' => 'required|string',
             'transaction_id' => 'nullable|string',
-            'total' => 'required|numeric',
         ];
     }
 
