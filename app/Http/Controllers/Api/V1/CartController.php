@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Http\Client\Request;
 
 class CartController extends Controller
 {
@@ -76,6 +77,39 @@ class CartController extends Controller
                 'quantity' => $request->quantity,
             ]);
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
+    }
+    
+    /**
+     * cart item increment
+    */
+    public function increment(Request $request,Cart $cart)
+    {
+        try {
+            $validatedData = $request->validate([
+                'quantity' => 'required|numeric',
+            ]);
+
+            if($validatedData->fails()){
+                return response()->json([
+                    'data' => [
+                        'status' => 'error',
+                        'message' => $validatedData->errors(),
+                    ],
+                ], 400);
+            }
+
+            $cart->update([
+                'quantity' => $cart->quantity + 1,
+            ]);
+            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item incremented successfully']);
         } catch (\Throwable $th) {
             return response()->json([
                 'data' => [
