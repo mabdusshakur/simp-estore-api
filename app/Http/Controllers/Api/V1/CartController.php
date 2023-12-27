@@ -121,6 +121,39 @@ class CartController extends Controller
     }
 
     /**
+     * cart item decrement
+    */
+    public function decrement(Request $request,Cart $cart)
+    {
+        try {
+            $validatedData = $request->validate([
+                'quantity' => 'required|numeric',
+            ]);
+
+            if($validatedData->fails()){
+                return response()->json([
+                    'data' => [
+                        'status' => 'error',
+                        'message' => $validatedData->errors(),
+                    ],
+                ], 400);
+            }
+
+            $cart->update([
+                'quantity' => $cart->quantity - 1,
+            ]);
+            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item decremented successfully']);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Cart $cart)
