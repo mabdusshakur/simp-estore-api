@@ -7,7 +7,6 @@ use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
-use Illuminate\Http\Client\Request;
 
 class CartController extends Controller
 {
@@ -93,19 +92,6 @@ class CartController extends Controller
     public function increment(Request $request, Cart $cart)
     {
         try {
-            $validatedData = $request->validate([
-                'quantity' => 'required|numeric',
-            ]);
-
-            if ($validatedData->fails()) {
-                return response()->json([
-                    'data' => [
-                        'status' => 'error',
-                        'message' => $validatedData->errors(),
-                    ],
-                ], 400);
-            }
-
             $cart->update([
                 'quantity' => $cart->quantity + 1,
             ]);
@@ -126,19 +112,6 @@ class CartController extends Controller
     public function decrement(Request $request, Cart $cart)
     {
         try {
-            $validatedData = $request->validate([
-                'quantity' => 'required|numeric',
-            ]);
-
-            if ($validatedData->fails()) {
-                return response()->json([
-                    'data' => [
-                        'status' => 'error',
-                        'message' => $validatedData->errors(),
-                    ],
-                ], 400);
-            }
-
             if ($cart->quantity > 1) {
 
                 $cart->update([
