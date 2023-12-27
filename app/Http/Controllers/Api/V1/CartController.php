@@ -86,18 +86,18 @@ class CartController extends Controller
             ], 500);
         }
     }
-    
+
     /**
      * cart item increment
-    */
-    public function increment(Request $request,Cart $cart)
+     */
+    public function increment(Request $request, Cart $cart)
     {
         try {
             $validatedData = $request->validate([
                 'quantity' => 'required|numeric',
             ]);
 
-            if($validatedData->fails()){
+            if ($validatedData->fails()) {
                 return response()->json([
                     'data' => [
                         'status' => 'error',
@@ -122,15 +122,15 @@ class CartController extends Controller
 
     /**
      * cart item decrement
-    */
-    public function decrement(Request $request,Cart $cart)
+     */
+    public function decrement(Request $request, Cart $cart)
     {
         try {
             $validatedData = $request->validate([
                 'quantity' => 'required|numeric',
             ]);
 
-            if($validatedData->fails()){
+            if ($validatedData->fails()) {
                 return response()->json([
                     'data' => [
                         'status' => 'error',
@@ -139,9 +139,12 @@ class CartController extends Controller
                 ], 400);
             }
 
-            $cart->update([
-                'quantity' => $cart->quantity - 1,
-            ]);
+            if ($cart->quantity > 1) {
+
+                $cart->update([
+                    'quantity' => $cart->quantity - 1,
+                ]);
+            }
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item decremented successfully']);
         } catch (\Throwable $th) {
             return response()->json([
