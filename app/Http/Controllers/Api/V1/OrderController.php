@@ -45,7 +45,7 @@ class OrderController extends Controller
                 $order = Order::create([
                     'user_id' => auth()->user()->id,
                     'total' => $totalPrice,
-                    'status' => 'pending',
+                    'status' => $request->status,
                     'payment_method' => $request->payment_method,
                 ]);
                 if($order)
