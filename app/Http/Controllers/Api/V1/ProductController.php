@@ -121,6 +121,16 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'stock' => $request->stock,
             ]);
+            $images = $request->file('images');
+            if($images){
+                foreach ($images as $image) {
+                    $fileName = time() . '-' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
+                    $filePath = $image->move(public_path('images/product'), $fileName);
+                    $product->images()->create([
+                        'path' => $filePath,
+                    ]);
+                }
+            }
             return new ProductResource([$product, 'status' => 'success', 'message' => 'Product updated successfully']);
         } catch (\Throwable $th) {
             return response()->json([
