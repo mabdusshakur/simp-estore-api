@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateProfileRequest;
 
 class ProfileController extends Controller
