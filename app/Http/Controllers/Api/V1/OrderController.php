@@ -80,7 +80,7 @@ class OrderController extends Controller
                         'data' => [
                             'status' => 'success',
                             'message' => 'Order created successfully',
-                            'order' => $order,
+                            'order' => new OrderResource($order),
                         ],
                     ], 201);
                 }
