@@ -34,7 +34,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('orders', [\App\Http\Controllers\Api\v1\OrderController::class, 'store']);
 
         //Payment
-        Route::post('confirm-stripe-intent-payment', [\App\Http\Controllers\Api\v1\OrderController::class, 'confirmStripeIntentPayment']);
+        Route::post('orders/confirm-stripe-intent-payment', [\App\Http\Controllers\Api\v1\OrderController::class, 'confirmStripeIntentPayment']);
 
         // Admin routes
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
