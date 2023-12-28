@@ -10,6 +10,7 @@ use Stripe\PaymentIntent;
 use App\Models\OrderItems;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
@@ -69,7 +70,12 @@ class OrderController extends Controller
                         $cartItem->product->save();
                         $cartItem->delete();
                     }
-
+                    $mail_data = [
+                        'subject' => 'Order created successfully',
+                        'customer_name' => auth()->user()->name,
+                        'order' => $order,
+                    ];
+                    Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
                     return response()->json([
                         'data' => [
                             'status' => 'success',
