@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Order Status Update</title>
 </head>
+
 <body>
     <h1>Order Status Update</h1>
 
@@ -28,6 +30,7 @@
     <p>Thank you for shopping with us.</p>
 
     <p>Best Regards,</p>
-    <p>{{config('app.name')}}</p>
+    <p>{{ config('app.name') }}</p>
 </body>
+
 </html>
