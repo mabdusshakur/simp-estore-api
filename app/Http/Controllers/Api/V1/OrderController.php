@@ -177,7 +177,7 @@ class OrderController extends Controller
                 try {
                     $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
                     $intentResponse = $stripe->paymentIntents->create([
-                        'amount' =>  $totalPrice,
+                        'amount' => $totalPrice,
                         'currency' => 'usd',
                         'automatic_payment_methods' => ['enabled' => true],
                     ]);
@@ -223,7 +223,7 @@ class OrderController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
         $paymentIntent = PaymentIntent::retrieve($request->payment_intent_client_id);
-        if ($paymentIntent->status === 'succeeded') {     
+        if ($paymentIntent->status === 'succeeded') {
             $cartItems = Cart::where('user_id', auth()->user()->id)->get();
             $order = Order::where('transaction_id', $request->payment_intent_client_id)->first();
             $order->status = 'completed';
