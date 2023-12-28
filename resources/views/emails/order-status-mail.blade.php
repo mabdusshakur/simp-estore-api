@@ -13,15 +13,15 @@
     <table>
         <tr>
             <td>Order ID:</td>
-            <td>{{ $mail_data['order_id'] }}</td>
+            <td>{{ $mail_data['order']['id'] }}</td>
         </tr>
         <tr>
             <td>Order Status:</td>
-            <td>{{ $mail_data['order_status'] }}</td>
+            <td>{{ $mail_data['order']['status'] }}</td>
         </tr>
         <tr>
             <td>Order Date:</td>
-            <td>{{ $mail_data['order_date'] }}</td>
+            <td>{{ $mail_data['order']['created_at'] }}</td>
         </tr>
     </table>
 
