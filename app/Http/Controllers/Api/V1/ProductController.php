@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use Storage;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
