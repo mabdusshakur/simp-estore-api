@@ -142,7 +142,12 @@ class OrderController extends Controller
                                 $cartItem->product->save();
                                 $cartItem->delete();
                             }
-
+                            $mail_data = [
+                                'subject' => 'Order created successfully',
+                                'customer_name' => auth()->user()->name,
+                                'order' => $order,
+                            ];
+                            Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
                             return response()->json([
                                 'data' => [
                                     'status' => 'success',
