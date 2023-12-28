@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Resources\OrderResource;
+use Validator;
+use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Order;
+use Stripe\PaymentIntent;
+use App\Models\OrderItems;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Models\OrderItems;
-use Validator;
 
 class OrderController extends Controller
 {
@@ -159,6 +162,37 @@ class OrderController extends Controller
                         ],
                     ], 500);
                 }
+            } else if ($request->payment_method == 'stripe_intent') {
+                try {
+                    $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+                    $intentResponse = $stripe->paymentIntents->create([
+                        'amount' =>  $totalPrice,
+                        'currency' => 'usd',
+                        'automatic_payment_methods' => ['enabled' => true],
+                    ]);
+                    $order = Order::create([
+                        'user_id' => auth()->user()->id,
+                        'total' => $totalPrice,
+                        'status' => 'pending',
+                        'payment_method' => $request->payment_method,
+                        'transaction_id' => $intentResponse->id,
+                    ]);
+                    return response()->json([
+                        'data' => [
+                            'status' => 'success',
+                            'message' => 'Order on pending payment',
+                            'order' => $order,
+                            'client_secret' => $intentResponse->client_secret,
+                        ],
+                    ], 201);
+                } catch (\Throwable $th) {
+                    return response()->json([
+                        'data' => [
+                            'status' => 'error',
+                            'message' => $th->getMessage(),
+                        ],
+                    ], 500);
+                }
             }
 
         } catch (\Throwable $th) {
@@ -168,6 +202,41 @@ class OrderController extends Controller
                     'message' => $th->getMessage(),
                 ],
             ], 500);
+        }
+    }
+
+    /**
+     * Confirm stripe intent payment
+     */
+    public function confirmStripeIntentPayment(Request $request)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $paymentIntent = PaymentIntent::retrieve($request->payment_intent_client_id);
+        if ($paymentIntent->status === 'succeeded') {     
+            $cartItems = Cart::where('user_id', auth()->user()->id)->get();
+            $order = Order::where('transaction_id', $request->payment_intent_client_id)->first();
+            $order->status = 'completed';
+            foreach ($cartItems as $cartItem) {
+                $orderItem = new OrderItems();
+                $orderItem->order_id = $order->id;
+                $orderItem->product_id = $cartItem->product_id;
+                $orderItem->quantity = $cartItem->quantity;
+                $orderItem->price = $cartItem->product->sale_price ?? $cartItem->product->regular_price;
+                $orderItem->save();
+                $cartItem->product->stock -= $cartItem->quantity;
+                $cartItem->product->sold_count += $cartItem->quantity;
+                $cartItem->product->save();
+                $cartItem->delete();
+            }
+            return response()->json([
+                'success' => true,
+                'order' => "Order created successfully, payment intent status : " . $paymentIntent->status,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => 'Payment failed',
+            ]);
         }
     }
 
