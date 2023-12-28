@@ -216,6 +216,7 @@ class OrderController extends Controller
             $cartItems = Cart::where('user_id', auth()->user()->id)->get();
             $order = Order::where('transaction_id', $request->payment_intent_client_id)->first();
             $order->status = 'completed';
+            $order->save();
             foreach ($cartItems as $cartItem) {
                 $orderItem = new OrderItems();
                 $orderItem->order_id = $order->id;
