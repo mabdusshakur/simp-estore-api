@@ -284,6 +284,12 @@ class OrderController extends Controller
             $order->update([
                 'status' => $request->status,
             ]);
+            $mail_data = [
+                'subject' => 'Order status updated',
+                'customer_name' => $order->user->name,
+                'order' => $order,
+            ];
+            Mail::to($order->user->email)->send(new \App\Mail\OrderStatusMail($mail_data));
             return response()->json([
                 'data' => [
                     'status' => 'success',
