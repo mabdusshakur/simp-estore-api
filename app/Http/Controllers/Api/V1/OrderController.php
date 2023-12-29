@@ -279,7 +279,26 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        try {
+            $request->validated();
+            $order->update([
+                'status' => $request->status,
+            ]);
+            return response()->json([
+                'data' => [
+                    'status' => 'success',
+                    'message' => 'Order updated successfully',
+                    'order' => new OrderResource($order),
+                ],
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ],
+            ], 500);
+        }
     }
 
     /**
