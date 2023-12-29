@@ -44,8 +44,13 @@ This is a Simple Ecommerce REST-API project built with Laravel. It provides a ba
     php artisan serve
     ```
 
-## API Documentation
-A proper API documentation will be added soon, after finishing the project.
+# API Documentation
+* A proper API documentation will be added soon, after finishing the project.
+
+## Base URL
+
+The base URL for all API endpoints is `http://localhost:8000/api`.
+
 
 ## Contributing
 
