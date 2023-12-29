@@ -15,4 +15,8 @@ class Order extends Model
         'payment_method',
         'transaction_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
