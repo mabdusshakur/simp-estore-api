@@ -51,6 +51,11 @@ This is a Simple Ecommerce REST-API project built with Laravel. It provides a ba
 
 The base URL for all API endpoints is `http://localhost:8000/api`.
 
+## Authentication
+
+Authorization: Bearer <your_token_here>
+
+
 
 ## Contributing
 
