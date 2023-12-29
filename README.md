@@ -69,6 +69,17 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of product objects
 
+#### Get Product by ID
+
+-   URL: `/api/products/{id}`
+-   Method: `GET`
+-   Description: Retrieves a specific product by its ID.
+-   Parameters:
+    -   `id` (integer): The ID of the product.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Product object
+
 
 
 
