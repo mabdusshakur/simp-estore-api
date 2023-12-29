@@ -85,6 +85,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         try {
+            $product->view_count = $product->view_count + 1;
+            $product->save();
             return new ProductResource($product);
         } catch (\Throwable $th) {
             return response()->json([
