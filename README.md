@@ -119,7 +119,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated product object
 
+#### Delete Product
 
+-   URL: `/api/products/{id}`
+-   Method: `DELETE`
+-   Description: Deletes a product.
+-   Parameters:
+    -   `id` (integer): The ID of the product.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Product deleted successfully
 
 
 ## Contributing
