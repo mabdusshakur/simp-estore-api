@@ -100,6 +100,25 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created product object
 
+#### Update Product
+
+-   URL: `/api/products/{id}`
+-   Method: `PUT`
+-   Description: Updates an existing product.
+-   Parameters:
+    -   `name` (string): The name of the product. Required. Maximum length of 255 characters.
+    -   `slug` (string): The slug of the product (generated from the name).
+    -   `description` (string): The description of the product. Required.
+    -   `regular_price` (float): The regular price of the product. Required. Must be a numeric value.
+    -   `sale_price` (float): The sale price of the product. Optional. Must be a numeric value.
+    -   `category_id` (integer): The ID of the category the product belongs to. Required. Must exist in the "categories" table.
+    -   `subcategory_id` (integer): The ID of the subcategory the product belongs to. Required. Must exist in the "sub_categories" table.
+    -   `status` (string): The status of the product. Required. Must be a boolean value.
+    -   `stock` (integer): The stock quantity of the product. Required. Must be an integer value.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Updated product object
+
 
 
 
