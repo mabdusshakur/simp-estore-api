@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('orders', [\App\Http\Controllers\Api\v1\OrderController::class, 'index']);
         Route::post('orders', [\App\Http\Controllers\Api\v1\OrderController::class, 'store']);
 
-        //Payment
+        //Order Stripe Intent Payment Confirmation
         Route::post('orders/confirm-stripe-intent-payment', [\App\Http\Controllers\Api\v1\OrderController::class, 'confirmStripeIntentPayment']);
 
         // Admin routes
