@@ -55,6 +55,21 @@ The base URL for all API endpoints is `http://localhost:8000/api`.
 
 Authorization: Bearer <your_token_here>
 
+## Endpoints
+
+### Products
+
+#### Get All Products
+
+-   URL: `/api/products`
+-   Method: `GET`
+-   Description: Retrieves a list of all products.
+-   Parameters: None
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Array of product objects
+
+
 
 
 ## Contributing
