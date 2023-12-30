@@ -305,6 +305,20 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of carts objects
 
+#### Create Cart
+
+-   URL: `/api/carts`
+-   Method: `POST`
+-   Description: Creates a new carts.
+-   Parameters:
+    - `product_id` (integer): The ID of the product the cart belongs to. Required. Must exist in the "products" table.
+    - `quantity` (integer): The quantity of the product. Required.
+-   Response:
+    -   Status Code: `201 Created`
+    -   Body: Created cart object
+
+
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
