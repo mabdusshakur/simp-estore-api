@@ -425,6 +425,16 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON object containing the updated order data
 
+### Confirm Stripe Intent Payment
+
+- URL: `/api/orders/confirm-stripe-intent-payment`
+- Method: `POST`
+- Description: Confirms a Stripe intent payment for an order.
+- Request Body:
+    - `payment_intent_client_id` (string, required): The client ID of the payment intent.
+- Response:
+    - Status Code: `200 OK` if payment is successful, `400 Bad Request` if payment fails
+    - Body: JSON object indicating the success or failure of the payment
 
 ## Contributing
 
