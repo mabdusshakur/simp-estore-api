@@ -293,6 +293,18 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: All wishlist deleted successfully
 
+### Cart
+
+#### Get All Cart
+
+-   URL: `/api/carts`
+-   Method: `GET`
+-   Description: Retrieves a list of all carts.
+-   Parameters: None
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Array of carts objects
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
