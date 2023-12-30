@@ -225,6 +225,20 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created Sub-Category object
 
+#### Update Sub-Category
+
+-   URL: `/api/sub-categories/{id}`
+-   Method: `PUT`
+-   Description: Updates an existing Sub-Category.
+-   Parameters:
+    -   `name` (string): The name of the Sub-Category. Required. Maximum length of 255 characters. Unique.
+    -   `slug` (string): The slug of the Sub-Category (generated from the name).
+    -   `category_id` (integer): The ID of the category the Sub-Category belongs to. Required. Must exist in the "categories" table.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Updated Sub-Category object
+
+
 
 ## Contributing
 
