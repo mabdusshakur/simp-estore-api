@@ -337,6 +337,15 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart Item incremented successfully
 
+#### Decrement Cart Quantity (Specific Function) 
+
+-   URL: `carts/decrement/{cart}`
+-   Method: `POST`
+-   Description: Decrements the quantity of the product by 1.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Cart Item decremented successfully
+
 
 ## Contributing
 
