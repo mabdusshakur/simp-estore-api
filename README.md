@@ -130,6 +130,19 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Product deleted successfully
 
+### Categories
+
+#### Get All Categories
+
+-   URL: `/api/categories`
+-   Method: `GET`
+-   Description: Retrieves a list of all categories.
+-   Parameters: None
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Array of categories objects
+
+
 
 ## Contributing
 
