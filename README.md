@@ -12,47 +12,23 @@ This is a Simple Ecommerce REST-API project built with Laravel. It provides a ba
 
 ## Installation
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/mabdusshakur/simp-estore-api.git
-    ```
-
-2. Install the dependencies:
-    ```bash
-    composer install
-    ```
-
-3. Configure the environment variables:
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
-    - Update the `.env` file with Database credentials.
-
-4. Run the database migrations:
-    ```bash
-    php artisan migrate
-    ```
-5. Setup SMTP mail server:
-    - Update the `.env` file with the SMTP mail server details.
-
-6. Configure Stripe credentials:
-    - Update the `.env` file with the Stripe API keys.
-
-5. Start the development server:
-    ```bash
-    php artisan serve
-    ```
+1. Clone the repository: `git clone https://github.com/mabdusshakur/simp-estore-api.git`
+2. Install dependencies: `composer install`
+3. Set up your environment variables: Rename `.env.example` to `.env` and update the necessary values.
+4. Add your Stripe API secrets: Open the `.env` file and add your Stripe API keys in the `STRIPE_KEY` and `STRIPE_SECRET`.
+5. Configure your mail server: Open the `.env` file and update the `MAIL_*` variables with your mail server configurations.
+6. Connect the database: Open the `.env` file and update the `DB_*` variables with your database connection details.
+7. Generate an application key: `php artisan key:generate`
+8. Run database migrations: `php artisan migrate`
+9. Seed the database: `php artisan` , `php artisan db:seed --class=CountrySeeder`
+10. Start the development server: `php artisan serve`
 
 # API Documentation
-* A proper API documentation will be added soon, after finishing the project.
 
 ## Base URL
-
 The base URL for all API endpoints is `http://localhost:8000/api`.
 
 ## Authentication
-
 Authorization: Bearer <your_token_here>
 
 ## Endpoints
