@@ -153,6 +153,18 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: categories object
 
+#### Create Category
+
+-   URL: `/api/categories`
+-   Method: `POST`
+-   Description: Creates a new category.
+-   Parameters:
+    -   `name` (string): The name of the category. Required. Maximum length of 255 characters. Unique.
+    -   `slug` (string): The slug of the category (generated from the name).
+-   Response:
+    -   Status Code: `201 Created`
+    -   Body: Created category object
+
 
 
 ## Contributing
