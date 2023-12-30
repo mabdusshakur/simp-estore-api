@@ -177,7 +177,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated category object
 
+#### Delete Category
 
+-   URL: `/api/category/{id}`
+-   Method: `DELETE`
+-   Description: Deletes a category.
+-   Parameters:
+    -   `id` (integer): The ID of the category.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Category deleted successfully
 
 ## Contributing
 
