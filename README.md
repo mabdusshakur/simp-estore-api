@@ -357,6 +357,14 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart deleted successfully
 
+#### Delete All Cart
+
+-   URL: `/api/carts/destroy-all`
+-   Method: `POST`
+-   Description: Deletes all Cart items belongs to the Authenticated User.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Cart emptied successfully
 
 ## Contributing
 
