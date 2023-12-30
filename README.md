@@ -201,6 +201,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of Sub-Categories objects
 
+#### Get Sub-Category by ID
+
+-   URL: `/api/sub-categories/{id}`
+-   Method: `GET`
+-   Description: Retrieves a specific Sub-Categories by its ID.
+-   Parameters:
+    -   `id` (integer): The ID of the Sub-Categories.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Sub-Categories object
 
 
 ## Contributing
