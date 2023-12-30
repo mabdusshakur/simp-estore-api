@@ -395,7 +395,18 @@ Authorization: Bearer <your_token_here>
 - Response:
     - Status Code: `201 Created`
     - Body: JSON object containing the created order data
-    
+
+### Get Orders
+
+- URL: `/api/orders`
+- Method: `GET`
+- Description: Retrieves a list of orders.
+- Response:
+    - Status Code: `200 OK`
+    - Body: JSON array containing the order objects
+
+
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
