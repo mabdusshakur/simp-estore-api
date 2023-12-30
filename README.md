@@ -284,6 +284,14 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Wishlist deleted successfully
 
+#### Delete All Wishlist
+
+-   URL: `/api/wishlists/destroy-all`
+-   Method: `POST`
+-   Description: Deletes all wishlists belongs to the Authenticated User.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: All wishlist deleted successfully
 
 ## Contributing
 
