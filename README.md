@@ -371,6 +371,31 @@ Authorization: Bearer <your_token_here>
 - Response:
     - Status Code: `200 OK`
     - Body: JSON object containing the updated user's profile data
+
+## Order API
+
+### Create Order
+
+- URL: `/api/orders`
+- Method: `POST`
+- Description: Creates a new order.
+- Request Body:
+    - `status` (string, required): The status of the order.
+    - `payment_method` (string, required): The payment method used for the order.
+        - `options`:
+            - `cod` (Cash on Delivery)
+            - `stripe` (Stripe)
+                - `card_number` (string, required): The card number for payment.
+                - `exp_month` (string, required): The expiration month of the card.
+                - `exp_year` (string, required): The expiration year of the card.
+                - `cvc` (string, required): The card verification code.
+            - `stripe_intent` (Stripe Payment Intent)
+                - `follow #Confirm Stripe Intent Payment, reference`
+    - `transaction_id` (string, nullable): The transaction ID for the order.
+- Response:
+    - Status Code: `201 Created`
+    - Body: JSON object containing the created order data
+    
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
