@@ -342,6 +342,17 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart emptied successfully
 
+### Profile
+
+#### Show Profile
+
+- URL: `/api/profile`
+- Method: `GET`
+- Description: Retrieves the user's profile.
+- Response:
+    - Status Code: `200 OK`
+    - Body: JSON object containing the user's profile data
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
