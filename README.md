@@ -238,7 +238,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated Sub-Category object
 
+#### Delete Sub-Category
 
+-   URL: `/api/sub-categories/{id}`
+-   Method: `DELETE`
+-   Description: Deletes a Sub-Category.
+-   Parameters:
+    -   `id` (integer): The ID of the Sub-Category.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Sub-Category deleted successfully
 
 ## Contributing
 
