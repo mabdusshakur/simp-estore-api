@@ -414,6 +414,17 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON object containing the order data
 
+### Update Order
+
+- URL: `/api/orders/{id}`
+- Method: `PUT`
+- Description: Updates an existing order.
+- Request Body:
+    - `status` (string, required): The updated status of the order.
+- Response:
+    - Status Code: `200 OK`
+    - Body: JSON object containing the updated order data
+
 
 ## Contributing
 
