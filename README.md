@@ -165,6 +165,18 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created category object
 
+#### Update Category
+
+-   URL: `/api/category/{id}`
+-   Method: `PUT`
+-   Description: Updates an existing category.
+-   Parameters:
+    -   `name` (string): The name of the category. Required. Maximum length of 255 characters. Unique.
+    -   `slug` (string): The slug of the category (generated from the name).
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Updated category object
+
 
 
 ## Contributing
