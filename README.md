@@ -317,6 +317,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created cart object
 
+#### Update Cart
+
+-   URL: `/api/carts/{id}`
+-   Method: `PUT`
+-   Description: Updates an existing Cart.
+-   Parameters:
+    -   `quantity` (integer): The quantity of the product. Required.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Cart updated successfully
 
 
 ## Contributing
