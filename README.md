@@ -188,6 +188,21 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Category deleted successfully
 
+
+### Sub-Categories
+
+#### Get All Sub-Categories
+
+-   URL: `/api/sub-categories`
+-   Method: `GET`
+-   Description: Retrieves a list of all Sub-Categories.
+-   Parameters: None
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Array of Sub-Categories objects
+
+
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
