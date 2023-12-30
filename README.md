@@ -405,6 +405,14 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON array containing the order objects
 
+### Get Order By ID
+
+- URL: `/api/orders/{id}`
+- Method: `GET`
+- Description: Retrieves a specific order by ID.
+- Response:
+    - Status Code: `200 OK`
+    - Body: JSON object containing the order data
 
 
 ## Contributing
