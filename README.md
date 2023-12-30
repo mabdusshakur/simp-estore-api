@@ -249,6 +249,21 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Sub-Category deleted successfully
 
+
+### Wishlist
+
+#### Get All Wishlist
+
+-   URL: `/api/wishlists`
+-   Method: `GET`
+-   Description: Retrieves a list of all wishlists.
+-   Parameters: None
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Array of wishlists objects
+
+
+
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
