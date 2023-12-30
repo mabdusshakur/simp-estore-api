@@ -262,6 +262,16 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of wishlists objects
 
+#### Create Wishlist
+
+-   URL: `/api/wishlists`
+-   Method: `POST`
+-   Description: Creates a new wishlists.
+-   Parameters:
+    - `product_id` (integer): The ID of the product the wishlist belongs to. Required. Must exist in the "products" table.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Wishlist created successfully
 
 
 ## Contributing
