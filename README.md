@@ -353,6 +353,24 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON object containing the user's profile data
 
+#### Update Profile
+
+- URL: `/api/profile`
+- Method: `POST`
+- Description: Updates the user's profile.
+- Request Body:
+    - `name` (string, optional): The user's name.
+    - `email` (string, optional): The user's email.
+    - `phone_number` (numeric, optional): The user's phone number.
+    - `address_1` (string, optional): The user's address line 1.
+    - `address_2` (string, optional): The user's address line 2.
+    - `city` (string, optional): The user's city.
+    - `country` (numeric, optional): The user's country ID.
+    - `postal_code` (numeric, optional): The user's postal code.
+    - `avatar` (file, optional): The user's avatar.
+- Response:
+    - Status Code: `200 OK`
+    - Body: JSON object containing the updated user's profile data
 ## Contributing
 
 Contributors are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
