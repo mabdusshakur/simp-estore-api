@@ -142,6 +142,17 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of categories objects
 
+#### Get Category by ID
+
+-   URL: `/api/categories/{id}`
+-   Method: `GET`
+-   Description: Retrieves a specific categories by its ID.
+-   Parameters:
+    -   `id` (integer): The ID of the categories.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: categories object
+
 
 
 ## Contributing
