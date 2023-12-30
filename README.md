@@ -328,6 +328,15 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart updated successfully
 
+#### Increment Cart Quantity (Specific Function) 
+
+-   URL: `carts/increment/{cart}`
+-   Method: `POST`
+-   Description: Increments the quantity of the product by 1.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Cart Item incremented successfully
+
 
 ## Contributing
 
