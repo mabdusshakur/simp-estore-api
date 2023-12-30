@@ -346,6 +346,17 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart Item decremented successfully
 
+#### Delete Cart
+
+-   URL: `/api/carts/{id}`
+-   Method: `DELETE`
+-   Description: Deletes a carts.
+-   Parameters:
+    -   `id` (integer): The ID of the carts.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Cart deleted successfully
+
 
 ## Contributing
 
