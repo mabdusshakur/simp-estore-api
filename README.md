@@ -273,6 +273,17 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Wishlist created successfully
 
+#### Delete Wishlist
+
+-   URL: `/api/wishlists/{id}`
+-   Method: `DELETE`
+-   Description: Delete a Wishlist.
+-   Parameters:
+    -   `id` (integer): The ID of the Wishlist.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: Wishlist deleted successfully
+
 
 ## Contributing
 
