@@ -28,8 +28,9 @@ This is a Simple Ecommerce REST-API project built with Laravel. It provides a ba
 ## Base URL
 The base URL for all API endpoints is `http://localhost:8000/api`.
 ```
-    - current api version is v1
+    - current api version is { v1 }
     - http://localhost:8000/api/v1
+    - for admin route http://localhost:8000/api/v1/admin/{route}
 ```
 ## Endpoints
 
