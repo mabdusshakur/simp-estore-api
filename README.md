@@ -177,7 +177,7 @@ Authorization: Bearer <your_token_here>
 -   Parameters: None
 -   Response:
     -   Status Code: `200 OK`
-    -   Body: Array of categories objects
+    -   Body: Array of categories objects, with each object containing a list of subcategories
 
 #### Get Category by ID
 
@@ -188,7 +188,7 @@ Authorization: Bearer <your_token_here>
     -   `id` (integer): The ID of the categories.
 -   Response:
     -   Status Code: `200 OK`
-    -   Body: categories object
+    -   Body: category object, with each object containing a list of subcategories
 
 #### Create Category (Authentication Required, Admin Only)
 
