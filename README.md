@@ -190,7 +190,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: categories object
 
-#### Create Category
+#### Create Category (Authentication Required, Admin Only)
 
 -   URL: `/categories`
 -   Method: `POST`
@@ -202,7 +202,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created category object
 
-#### Update Category
+#### Update Category (Authentication Required, Admin Only)
 
 -   URL: `/category/{id}`
 -   Method: `PUT`
@@ -214,7 +214,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated category object
 
-#### Delete Category
+#### Delete Category (Authentication Required, Admin Only)
 
 -   URL: `/category/{id}`
 -   Method: `DELETE`
@@ -249,7 +249,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Sub-Categories object
 
-#### Create Sub-Category
+#### Create Sub-Category (Authentication Required, Admin Only)
 
 -   URL: `/sub-categories`
 -   Method: `POST`
@@ -262,7 +262,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created Sub-Category object
 
-#### Update Sub-Category
+#### Update Sub-Category (Authentication Required, Admin Only)
 
 -   URL: `/sub-categories/{id}`
 -   Method: `PUT`
@@ -275,7 +275,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated Sub-Category object
 
-#### Delete Sub-Category
+#### Delete Sub-Category (Authentication Required, Admin Only)
 
 -   URL: `/sub-categories/{id}`
 -   Method: `DELETE`
@@ -289,7 +289,7 @@ Authorization: Bearer <your_token_here>
 
 ### Wishlist
 
-#### Get All Wishlist
+#### Get All Wishlist (Authentication Required)
 
 -   URL: `/api/wishlists`
 -   Method: `GET`
@@ -299,7 +299,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of wishlists objects
 
-#### Create Wishlist
+#### Create Wishlist (Authentication Required)
 
 -   URL: `/api/wishlists`
 -   Method: `POST`
@@ -310,7 +310,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Wishlist created successfully
 
-#### Delete Wishlist
+#### Delete Wishlist (Authentication Required)
 
 -   URL: `/api/wishlists/{id}`
 -   Method: `DELETE`
@@ -321,7 +321,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Wishlist deleted successfully
 
-#### Delete All Wishlist
+#### Delete All Wishlist (Authentication Required)
 
 -   URL: `/api/wishlists/destroy-all`
 -   Method: `POST`
@@ -332,7 +332,7 @@ Authorization: Bearer <your_token_here>
 
 ### Cart
 
-#### Get All Cart
+#### Get All Cart (Authentication Required)
 
 -   URL: `/carts`
 -   Method: `GET`
@@ -342,7 +342,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Array of carts objects
 
-#### Create Cart
+#### Create Cart (Authentication Required)
 
 -   URL: `/carts`
 -   Method: `POST`
@@ -354,7 +354,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created cart object
 
-#### Update Cart
+#### Update Cart (Authentication Required)
 
 -   URL: `/carts/{id}`
 -   Method: `PUT`
@@ -365,7 +365,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart updated successfully
 
-#### Increment Cart Quantity (Specific Function) 
+#### Increment Cart Quantity (Specific Function) , (Authentication Required)
 
 -   URL: `/carts/increment/{cart}`
 -   Method: `POST`
@@ -374,7 +374,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart Item incremented successfully
 
-#### Decrement Cart Quantity (Specific Function) 
+#### Decrement Cart Quantity (Specific Function) , (Authentication Required)
 
 -   URL: `/carts/decrement/{cart}`
 -   Method: `POST`
@@ -383,7 +383,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart Item decremented successfully
 
-#### Delete Cart
+#### Delete Cart (Authentication Required)
 
 -   URL: `/carts/{id}`
 -   Method: `DELETE`
@@ -394,7 +394,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Cart deleted successfully
 
-#### Delete All Cart
+#### Delete All Cart (Authentication Required)
 
 -   URL: `/carts/destroy-all`
 -   Method: `POST`
@@ -405,7 +405,7 @@ Authorization: Bearer <your_token_here>
 
 ### Profile
 
-#### Show Profile
+#### Show Profile (Authentication Required)
 
 - URL: `/profile`
 - Method: `GET`
@@ -414,7 +414,7 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON object containing the user's profile data
 
-#### Update Profile
+#### Update Profile (Authentication Required)
 
 - URL: `/profile`
 - Method: `POST`
@@ -435,7 +435,7 @@ Authorization: Bearer <your_token_here>
 
 ## Order API
 
-### Create Order
+### Create Order (Authentication Required)
 
 - URL: `/orders`
 - Method: `POST`
@@ -457,7 +457,7 @@ Authorization: Bearer <your_token_here>
     - Status Code: `201 Created`
     - Body: JSON object containing the created order data
 
-### Get Orders
+### Get Orders (Authentication Required), (same route, admin role holder can access all orders, user role holder can access only his/her orders)
 
 - URL: `/orders`
 - Method: `GET`
@@ -466,7 +466,7 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON array containing the order objects
 
-### Get Order By ID
+### Get Order By ID (Authentication Required)
 
 - URL: `/orders/{id}`
 - Method: `GET`
@@ -475,7 +475,7 @@ Authorization: Bearer <your_token_here>
     - Status Code: `200 OK`
     - Body: JSON object containing the order data
 
-### Update Order
+### Update Order (Authentication Required, Admin Only)
 
 - URL: `/orders/{id}`
 - Method: `PUT`
