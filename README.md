@@ -57,8 +57,8 @@ Authorization: Bearer <your_token_here>
                 "name": "John Doe",
                 "email": "johndoe@example.com",
                 "phone_number": "1234567890",
-                ........
-                ........
+                "........" : "........",
+                "........" : "........"
             },
             "token": "1|H0ARNWXu38km000001JXyOM5555C2PmXKZr00000",
             "token_type": "Bearer"
