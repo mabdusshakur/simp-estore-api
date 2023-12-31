@@ -15,6 +15,10 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('categories', [\App\Http\Controllers\Api\v1\CategoryController::class, 'index']);
     Route::get('categories/{category}', [\App\Http\Controllers\Api\v1\CategoryController::class, 'show']);
 
+    //sub-category
+    Route::get('sub-categories', [\App\Http\Controllers\Api\v1\SubCategoryController::class, 'index']);
+    Route::get('sub-categories/{subCategory}', [\App\Http\Controllers\Api\v1\SubCategoryController::class, 'show']);
+    
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 

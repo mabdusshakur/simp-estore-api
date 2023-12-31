@@ -117,7 +117,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Product object
 
-#### Create Product
+#### Create Product (Authentication Required, Admin Only)
 
 -   URL: `/products`
 -   Method: `POST`
@@ -137,7 +137,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `201 Created`
     -   Body: Created product object
 
-#### Update Product
+#### Update Product (Authentication Required, Admin Only)
 
 -   URL: `/products/{id}`
 -   Method: `PUT`
@@ -156,7 +156,7 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated product object
 
-#### Delete Product
+#### Delete Product (Authentication Required, Admin Only)
 
 -   URL: `/products/{id}`
 -   Method: `DELETE`
