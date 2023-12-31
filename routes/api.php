@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('register', [AuthController::class, 'register'])->name('register');
+    
+    //product
+    Route::get('products', [\App\Http\Controllers\Api\v1\ProductController::class, 'index']);
+    Route::get('products/{product}', [\App\Http\Controllers\Api\v1\ProductController::class, 'show']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -19,10 +23,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('carts/destroy-all', [\App\Http\Controllers\Api\v1\CartController::class, 'destroyAll']);
         Route::post('carts/increment/{cart}', [\App\Http\Controllers\Api\v1\CartController::class, 'increment']);
         Route::post('carts/decrement/{cart}', [\App\Http\Controllers\Api\v1\CartController::class, 'decrement']);
-
-        //product
-        Route::get('products', [\App\Http\Controllers\Api\v1\ProductController::class, 'index']);
-        Route::get('products/{product}', [\App\Http\Controllers\Api\v1\ProductController::class, 'show']);
 
         //Profile
         Route::get('profile', [\App\Http\Controllers\Api\v1\ProfileController::class, 'show']);
