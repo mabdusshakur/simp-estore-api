@@ -28,10 +28,42 @@ This is a Simple Ecommerce REST-API project built with Laravel. It provides a ba
 ## Base URL
 The base URL for all API endpoints is `http://localhost:8000/api`.
 
+
+## Endpoints
+
 ## Authentication
 Authorization: Bearer <your_token_here>
 
-## Endpoints
+### User Authentication
+
+#### Create User
+
+-   URL: `/api/register`
+-   Method: `POST`
+-   Description: Creates a new user.
+-   Parameters:
+    -   `name` (string): The name of the product. Required. Maximum length of 255 characters.
+    -   `email` (string): The email of the user. Required. Must be a valid email format. Must be unique in the "users" table.
+    -   `phone_number` (string): The phone number of the user. Required. Must be a numeric value. Must be unique in the "users" table.
+    -   `password` (string): The password of the user. Required. Minimum length of 8 characters. Must be confirmed with `password_confirmation`, field.
+-   Response:
+    -   Status Code: `201 Created`
+    -   Body: 
+        ```json
+        {
+            "status": "success",
+            "message": "User created successfully",
+            "user": {
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone_number": "1234567890",
+                ........
+                ........
+            },
+            "token": "1|H0ARNWXu38km000001JXyOM5555C2PmXKZr00000",
+            "token_type": "Bearer"
+        }
+        ```
 
 ### Products
 
