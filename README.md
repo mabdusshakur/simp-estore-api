@@ -41,7 +41,7 @@ Authorization: Bearer <your_token_here>
 
 #### Create User
 
--   URL: `/api/register`
+-   URL: `/register`
 -   Method: `POST`
 -   Description: Creates a new user.
 -   Parameters:
@@ -69,7 +69,7 @@ Authorization: Bearer <your_token_here>
         ```
 #### Login User
 
--   URL: `/api/login`
+-   URL: `/login`
 -   Method: `POST`
 -   Description: Login a user.
 -   Parameters:
@@ -98,7 +98,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get All Products
 
--   URL: `/api/products`
+-   URL: `/products`
 -   Method: `GET`
 -   Description: Retrieves a list of all products.
 -   Parameters: None
@@ -108,7 +108,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get Product by ID
 
--   URL: `/api/products/{id}`
+-   URL: `/products/{id}`
 -   Method: `GET`
 -   Description: Retrieves a specific product by its ID.
 -   Parameters:
@@ -119,7 +119,7 @@ Authorization: Bearer <your_token_here>
 
 #### Create Product
 
--   URL: `/api/products`
+-   URL: `/products`
 -   Method: `POST`
 -   Description: Creates a new product.
 -   Parameters:
@@ -139,7 +139,7 @@ Authorization: Bearer <your_token_here>
 
 #### Update Product
 
--   URL: `/api/products/{id}`
+-   URL: `/products/{id}`
 -   Method: `PUT`
 -   Description: Updates an existing product.
 -   Parameters:
@@ -158,7 +158,7 @@ Authorization: Bearer <your_token_here>
 
 #### Delete Product
 
--   URL: `/api/products/{id}`
+-   URL: `/products/{id}`
 -   Method: `DELETE`
 -   Description: Deletes a product.
 -   Parameters:
@@ -171,7 +171,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get All Categories
 
--   URL: `/api/categories`
+-   URL: `/categories`
 -   Method: `GET`
 -   Description: Retrieves a list of all categories.
 -   Parameters: None
@@ -181,7 +181,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get Category by ID
 
--   URL: `/api/categories/{id}`
+-   URL: `/categories/{id}`
 -   Method: `GET`
 -   Description: Retrieves a specific categories by its ID.
 -   Parameters:
@@ -192,7 +192,7 @@ Authorization: Bearer <your_token_here>
 
 #### Create Category
 
--   URL: `/api/categories`
+-   URL: `/categories`
 -   Method: `POST`
 -   Description: Creates a new category.
 -   Parameters:
@@ -204,7 +204,7 @@ Authorization: Bearer <your_token_here>
 
 #### Update Category
 
--   URL: `/api/category/{id}`
+-   URL: `/category/{id}`
 -   Method: `PUT`
 -   Description: Updates an existing category.
 -   Parameters:
@@ -216,7 +216,7 @@ Authorization: Bearer <your_token_here>
 
 #### Delete Category
 
--   URL: `/api/category/{id}`
+-   URL: `/category/{id}`
 -   Method: `DELETE`
 -   Description: Deletes a category.
 -   Parameters:
@@ -230,7 +230,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get All Sub-Categories
 
--   URL: `/api/sub-categories`
+-   URL: `/sub-categories`
 -   Method: `GET`
 -   Description: Retrieves a list of all Sub-Categories.
 -   Parameters: None
@@ -240,7 +240,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get Sub-Category by ID
 
--   URL: `/api/sub-categories/{id}`
+-   URL: `/sub-categories/{id}`
 -   Method: `GET`
 -   Description: Retrieves a specific Sub-Categories by its ID.
 -   Parameters:
@@ -251,7 +251,7 @@ Authorization: Bearer <your_token_here>
 
 #### Create Sub-Category
 
--   URL: `/api/sub-categories`
+-   URL: `/sub-categories`
 -   Method: `POST`
 -   Description: Creates a new Sub-Category.
 -   Parameters:
@@ -264,7 +264,7 @@ Authorization: Bearer <your_token_here>
 
 #### Update Sub-Category
 
--   URL: `/api/sub-categories/{id}`
+-   URL: `/sub-categories/{id}`
 -   Method: `PUT`
 -   Description: Updates an existing Sub-Category.
 -   Parameters:
@@ -277,7 +277,7 @@ Authorization: Bearer <your_token_here>
 
 #### Delete Sub-Category
 
--   URL: `/api/sub-categories/{id}`
+-   URL: `/sub-categories/{id}`
 -   Method: `DELETE`
 -   Description: Deletes a Sub-Category.
 -   Parameters:
@@ -334,7 +334,7 @@ Authorization: Bearer <your_token_here>
 
 #### Get All Cart
 
--   URL: `/api/carts`
+-   URL: `/carts`
 -   Method: `GET`
 -   Description: Retrieves a list of all carts.
 -   Parameters: None
@@ -344,7 +344,7 @@ Authorization: Bearer <your_token_here>
 
 #### Create Cart
 
--   URL: `/api/carts`
+-   URL: `/carts`
 -   Method: `POST`
 -   Description: Creates a new carts.
 -   Parameters:
@@ -356,7 +356,7 @@ Authorization: Bearer <your_token_here>
 
 #### Update Cart
 
--   URL: `/api/carts/{id}`
+-   URL: `/carts/{id}`
 -   Method: `PUT`
 -   Description: Updates an existing Cart.
 -   Parameters:
@@ -367,7 +367,7 @@ Authorization: Bearer <your_token_here>
 
 #### Increment Cart Quantity (Specific Function) 
 
--   URL: `carts/increment/{cart}`
+-   URL: `/carts/increment/{cart}`
 -   Method: `POST`
 -   Description: Increments the quantity of the product by 1.
 -   Response:
@@ -376,7 +376,7 @@ Authorization: Bearer <your_token_here>
 
 #### Decrement Cart Quantity (Specific Function) 
 
--   URL: `carts/decrement/{cart}`
+-   URL: `/carts/decrement/{cart}`
 -   Method: `POST`
 -   Description: Decrements the quantity of the product by 1.
 -   Response:
@@ -385,7 +385,7 @@ Authorization: Bearer <your_token_here>
 
 #### Delete Cart
 
--   URL: `/api/carts/{id}`
+-   URL: `/carts/{id}`
 -   Method: `DELETE`
 -   Description: Deletes a carts.
 -   Parameters:
@@ -396,7 +396,7 @@ Authorization: Bearer <your_token_here>
 
 #### Delete All Cart
 
--   URL: `/api/carts/destroy-all`
+-   URL: `/carts/destroy-all`
 -   Method: `POST`
 -   Description: Deletes all Cart items belongs to the Authenticated User.
 -   Response:
@@ -407,7 +407,7 @@ Authorization: Bearer <your_token_here>
 
 #### Show Profile
 
-- URL: `/api/profile`
+- URL: `/profile`
 - Method: `GET`
 - Description: Retrieves the user's profile.
 - Response:
@@ -416,7 +416,7 @@ Authorization: Bearer <your_token_here>
 
 #### Update Profile
 
-- URL: `/api/profile`
+- URL: `/profile`
 - Method: `POST`
 - Description: Updates the user's profile.
 - Request Body:
@@ -437,7 +437,7 @@ Authorization: Bearer <your_token_here>
 
 ### Create Order
 
-- URL: `/api/orders`
+- URL: `/orders`
 - Method: `POST`
 - Description: Creates a new order.
 - Request Body:
@@ -459,7 +459,7 @@ Authorization: Bearer <your_token_here>
 
 ### Get Orders
 
-- URL: `/api/orders`
+- URL: `/orders`
 - Method: `GET`
 - Description: Retrieves a list of orders.
 - Response:
@@ -468,7 +468,7 @@ Authorization: Bearer <your_token_here>
 
 ### Get Order By ID
 
-- URL: `/api/orders/{id}`
+- URL: `/orders/{id}`
 - Method: `GET`
 - Description: Retrieves a specific order by ID.
 - Response:
@@ -477,7 +477,7 @@ Authorization: Bearer <your_token_here>
 
 ### Update Order
 
-- URL: `/api/orders/{id}`
+- URL: `/orders/{id}`
 - Method: `PUT`
 - Description: Updates an existing order.
 - Request Body:
@@ -488,7 +488,7 @@ Authorization: Bearer <your_token_here>
 
 ### Confirm Stripe Intent Payment
 
-- URL: `/api/orders/confirm-stripe-intent-payment`
+- URL: `/orders/confirm-stripe-intent-payment`
 - Method: `POST`
 - Description: Confirms a Stripe intent payment for an order.
 - Request Body:
