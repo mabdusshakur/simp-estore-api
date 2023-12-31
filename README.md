@@ -64,7 +64,33 @@ Authorization: Bearer <your_token_here>
             "token_type": "Bearer"
         }
         ```
+#### Login User
 
+-   URL: `/api/login`
+-   Method: `POST`
+-   Description: Login a user.
+-   Parameters:
+    -   Parameters:
+        -   `email` (string): The email of the user. Sometimes required. Must be a valid email format. Required if `phone_number` is not provided. 
+        -   `phone_number` (string): The phone number of the user. Sometimes required. Must be a numeric value. Required if `email` is not provided.
+        -   `password` (string): The password of the user. Required. Minimum length of 8 characters.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: 
+        ```json
+        {
+            "status": "success",
+            "user": {
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone_number": "1234567890",
+                "........" : "........",
+                "........" : "........"
+            },
+            "token": "2|H0ARNWXu38km000001JXyOM5555C2PmXKZr00000",
+            "token_type": "Bearer"
+        }
+        ```
 ### Products
 
 #### Get All Products
