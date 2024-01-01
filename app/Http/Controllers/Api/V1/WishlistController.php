@@ -40,10 +40,8 @@ class WishlistController extends Controller
             return new WishlistResource([$wishlist, 'status' => 'success', 'message' => 'Wishlist created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -57,10 +55,8 @@ class WishlistController extends Controller
             return new WishlistResource($wishlist);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -89,17 +85,13 @@ class WishlistController extends Controller
         try {
             $wishlist->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Wishlist deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -113,17 +105,13 @@ class WishlistController extends Controller
         try {
             Wishlist::where('user_id', auth()->user()->id)->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'All wishlist deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }

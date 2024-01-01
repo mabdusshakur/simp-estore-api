@@ -50,10 +50,8 @@ class SubCategoryController extends Controller
             return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'SubCategory created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
