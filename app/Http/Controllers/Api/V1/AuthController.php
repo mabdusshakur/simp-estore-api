@@ -25,10 +25,8 @@ class AuthController extends Controller
 
             if ($validatedData->fails()) {
                 return response()->json([
-                    'data' => [
-                        'status' => 'error',
-                        'message' => $validatedData->errors(),
-                    ],
+                    'status' => 'error',
+                    'message' => $validatedData->errors(),
                 ], 401);
             }
 
@@ -49,20 +47,16 @@ class AuthController extends Controller
             $token = $user->createToken('registerToken')->plainTextToken;
 
             return response()->json([
-                'data' => [
-                    'status' => 'success',
-                    'message' => 'User created successfully',
-                    'user' => $user,
-                    'token' => $token,
-                    'token_type' => 'Bearer',
-                ],
+                'status' => 'success',
+                'message' => 'User created successfully',
+                'user' => $user,
+                'token' => $token,
+                'token_type' => 'Bearer',
             ], 201);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
-                ],
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -78,8 +72,8 @@ class AuthController extends Controller
 
             if ($validatedData->fails()) {
                 return response()->json([
-                        'status' => 'error',
-                        'message' => $validatedData->errors(),
+                    'status' => 'error',
+                    'message' => $validatedData->errors(),
                 ], 401);
             }
 
@@ -87,8 +81,8 @@ class AuthController extends Controller
 
             if (!Auth::attempt($credentials)) {
                 return response()->json([
-                        'status' => 'error',
-                        'message' => 'Invalid login details',
+                    'status' => 'error',
+                    'message' => 'Invalid login details',
                 ], 401);
             }
 
@@ -96,15 +90,15 @@ class AuthController extends Controller
             $token = $user->createToken('loginToken')->plainTextToken;
 
             return response()->json([
-                    'status' => 'success',
-                    'user' => $user,
-                    'token' => $token,
-                    'token_type' => 'Bearer',
+                'status' => 'success',
+                'user' => $user,
+                'token' => $token,
+                'token_type' => 'Bearer',
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
 
