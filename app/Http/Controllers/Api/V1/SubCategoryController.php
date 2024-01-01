@@ -67,10 +67,8 @@ class SubCategoryController extends Controller
             return new SubCategoryResource($subCategory);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -98,10 +96,8 @@ class SubCategoryController extends Controller
             return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'Category updated successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -115,17 +111,13 @@ class SubCategoryController extends Controller
             Category::where('id', $subCategory->category_id)->decrement('sub_categories_count', 1);
             $subCategory->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'SubCategory deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
