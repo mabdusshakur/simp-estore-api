@@ -291,18 +291,14 @@ class OrderController extends Controller
             ];
             Mail::to($order->user->email)->send(new \App\Mail\OrderStatusMail($mail_data));
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Order updated successfully',
                     'order' => new OrderResource($order),
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
