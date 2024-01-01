@@ -90,10 +90,8 @@ class CategoryController extends Controller
             return new CategoryResource([$category, 'status' => 'success', 'message' => 'Category updated successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
