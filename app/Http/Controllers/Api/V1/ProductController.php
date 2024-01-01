@@ -174,17 +174,13 @@ class ProductController extends Controller
             SubCategory::where('id', $product->subcategory_id)->decrement('product_count', 1);
             $product->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Product deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
