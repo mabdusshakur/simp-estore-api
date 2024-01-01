@@ -98,10 +98,8 @@ class CartController extends Controller
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item incremented successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -121,10 +119,8 @@ class CartController extends Controller
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item decremented successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -137,17 +133,13 @@ class CartController extends Controller
         try {
             $cart->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Cart deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -160,17 +152,13 @@ class CartController extends Controller
         try {
             Cart::where('user_id', auth()->user()->id)->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Cart emptied successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
