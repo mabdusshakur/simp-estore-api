@@ -78,10 +78,8 @@ class AuthController extends Controller
 
             if ($validatedData->fails()) {
                 return response()->json([
-                    'data' => [
                         'status' => 'error',
                         'message' => $validatedData->errors(),
-                    ],
                 ], 401);
             }
 
@@ -89,10 +87,8 @@ class AuthController extends Controller
 
             if (!Auth::attempt($credentials)) {
                 return response()->json([
-                    'data' => [
                         'status' => 'error',
                         'message' => 'Invalid login details',
-                    ],
                 ], 401);
             }
 
