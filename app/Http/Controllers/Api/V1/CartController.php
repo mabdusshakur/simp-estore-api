@@ -41,10 +41,8 @@ class CartController extends Controller
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -78,10 +76,8 @@ class CartController extends Controller
             return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart updated successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }

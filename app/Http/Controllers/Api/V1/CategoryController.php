@@ -48,10 +48,8 @@ class CategoryController extends Controller
             return new CategoryResource([$category, 'status' => 'success', 'message' => 'Category created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -64,10 +62,8 @@ class CategoryController extends Controller
             return new CategoryResource($category);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
