@@ -71,10 +71,8 @@ class ProductController extends Controller
             return new ProductResource([$product, 'status' => 'success', 'message' => 'Product created successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -90,10 +88,8 @@ class ProductController extends Controller
             return new ProductResource($product);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -137,10 +133,8 @@ class ProductController extends Controller
             return new ProductResource([$product, 'status' => 'success', 'message' => 'Product updated successfully']);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
@@ -158,17 +152,13 @@ class ProductController extends Controller
             }
             $image->delete();
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'message' => 'Image deleted successfully',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
 
