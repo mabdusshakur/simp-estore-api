@@ -77,11 +77,9 @@ class OrderController extends Controller
                     ];
                     Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
                     return response()->json([
-                        'data' => [
                             'status' => 'success',
                             'message' => 'Order created successfully',
                             'order' => new OrderResource($order),
-                        ],
                     ], 201);
                 }
             } else if ($request->payment_method == 'stripe') {
@@ -96,10 +94,8 @@ class OrderController extends Controller
                     ]);
                     if ($validatedData->fails()) {
                         return response()->json([
-                            'data' => [
                                 'status' => 'error',
                                 'message' => $validatedData->errors()->first(),
-                            ],
                         ], 400);
                     }
 
@@ -149,18 +145,14 @@ class OrderController extends Controller
                             ];
                             Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
                             return response()->json([
-                                'data' => [
                                     'status' => 'success',
                                     'message' => 'Order created successfully',
                                     'order' => $order,
-                                ],
                             ], 201);
                         } else {
                             return response()->json([
-                                'data' => [
                                     'status' => 'error',
                                     'message' => 'Payment failed',
-                                ],
                             ], 500);
                         }
                     }
@@ -189,29 +181,23 @@ class OrderController extends Controller
                         'transaction_id' => $intentResponse->id,
                     ]);
                     return response()->json([
-                        'data' => [
                             'status' => 'success',
                             'message' => 'Order on pending payment',
                             'order' => $order,
                             'client_secret' => $intentResponse->client_secret,
-                        ],
                     ], 201);
                 } catch (\Throwable $th) {
                     return response()->json([
-                        'data' => [
                             'status' => 'error',
                             'message' => $th->getMessage(),
-                        ],
                     ], 500);
                 }
             }
 
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
     }
