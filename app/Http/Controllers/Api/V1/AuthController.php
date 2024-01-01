@@ -100,19 +100,15 @@ class AuthController extends Controller
             $token = $user->createToken('loginToken')->plainTextToken;
 
             return response()->json([
-                'data' => [
                     'status' => 'success',
                     'user' => $user,
                     'token' => $token,
                     'token_type' => 'Bearer',
-                ],
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'data' => [
                     'status' => 'error',
                     'message' => $th->getMessage(),
-                ],
             ], 500);
         }
 
