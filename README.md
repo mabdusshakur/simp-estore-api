@@ -102,6 +102,9 @@ Authorization: Bearer <your_token_here>
 -   Method: `GET`
 -   Description: Retrieves a list of all products.
 -   Parameters: None
+    - Optional Query Parameters:
+        - search by name: `?search=product_name`
+
 -   Response:
     -   Status Code: `200 OK`
     -   Body: Array of product objects
