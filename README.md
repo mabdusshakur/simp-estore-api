@@ -175,6 +175,9 @@ Authorization: Bearer <your_token_here>
 -   Method: `GET`
 -   Description: Retrieves a list of all categories.
 -   Parameters: None
+    -Optional Query Parameters:
+        - search by name: `?search=category_name`
+
 -   Response:
     -   Status Code: `200 OK`
     -   Body: Array of categories objects, with each object containing a list of subcategories
