@@ -248,7 +248,7 @@ Authorization: Bearer <your_token_here>
         - sotr by created_at: `?sort=created_at&order=asc` || `?sort=created_at&order=desc`
         - sotr by updated_at: `?sort=updated_at&order=asc` || `?sort=updated_at&order=desc`
         - sotr by products_count: `?sort=products_count&order=asc` || `?sort=products_count&order=desc`
-
+        - paginate: `?paginate=20` || default 10
 -   Response:
     -   Status Code: `200 OK`
     -   Body: Array of Sub-Categories objects
