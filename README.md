@@ -180,6 +180,8 @@ Authorization: Bearer <your_token_here>
         - sotr by name: `?sort=name&order=asc` || `?sort=name&order=desc`
         - sotr by created_at: `?sort=created_at&order=asc` || `?sort=created_at&order=desc`
         - sotr by updated_at: `?sort=updated_at&order=asc` || `?sort=updated_at&order=desc`
+        - sotr by products_count: `?sort=products_count&order=asc` || `?sort=products_count&order=desc`
+        - sotr by sub_categories_count: `?sort=sub_categories_count&order=asc` || `?sort=sub_categories_count&order=desc`
 
 -   Response:
     -   Status Code: `200 OK`
