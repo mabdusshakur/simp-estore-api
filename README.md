@@ -177,6 +177,7 @@ Authorization: Bearer <your_token_here>
 -   Parameters: None
     -Optional Query Parameters:
         - search by name: `?search=category_name`
+        - sotr by name: `?sort=name&order=asc` || `?sort=name&order=desc`
 
 -   Response:
     -   Status Code: `200 OK`
