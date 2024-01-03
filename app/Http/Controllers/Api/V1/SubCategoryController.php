@@ -47,7 +47,11 @@ class SubCategoryController extends Controller
                 'category_id' => $request->category_id,
             ]);
             Category::where('id', $request->category_id)->increment('sub_categories_count', 1);
-            return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'SubCategory created successfully']);
+            return response()->json([
+                    'status' => 'success',
+                    'message' => 'Sub Category Created successfully',
+                    'data' => new SubCategoryResource($subCategory),
+            ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
