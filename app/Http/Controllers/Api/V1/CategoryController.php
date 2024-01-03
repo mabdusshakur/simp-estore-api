@@ -46,14 +46,14 @@ class CategoryController extends Controller
                 'slug' => Str::slug($request->name),
             ]);
             return response()->json([
-                    'status' => 'success',
-                    'message' => 'Category created successfully',
-                    'data' => new CategoryResource($category),
+                'status' => 'success',
+                'message' => 'Category created successfully',
+                'data' => new CategoryResource($category),
             ], 201);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -66,8 +66,8 @@ class CategoryController extends Controller
             return new CategoryResource($category);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -91,11 +91,15 @@ class CategoryController extends Controller
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
             ]);
-            return new CategoryResource([$category, 'status' => 'success', 'message' => 'Category updated successfully']);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category Updated successfully',
+                'data' => new CategoryResource($category),
+            ], 201);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -108,13 +112,13 @@ class CategoryController extends Controller
         try {
             $category->delete();
             return response()->json([
-                    'status' => 'success',
-                    'message' => 'Category deleted successfully',
+                'status' => 'success',
+                'message' => 'Category deleted successfully',
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
