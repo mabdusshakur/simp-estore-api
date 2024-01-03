@@ -111,6 +111,8 @@ Authorization: Bearer <your_token_here>
         - sotr by sale_price: `?sort=sale_price&order=asc` || `?sort=sale_price&order=desc`
         - sotr by status: `?sort=status&order=asc` || `?sort=status&order=desc`
         - sotr by stock: `?sort=stock&order=asc` || `?sort=stock&order=desc`
+        - sort by view_count: `?sort=view_count&order=asc` || `?sort=view_count&order=desc`
+        - sort by sold_count: `?sort=sold_count&order=asc` || `?sort=sold_count&order=desc`
 
 -   Response:
     -   Status Code: `200 OK`
