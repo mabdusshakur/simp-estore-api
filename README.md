@@ -113,7 +113,7 @@ Authorization: Bearer <your_token_here>
         - sotr by stock: `?sort=stock&order=asc` || `?sort=stock&order=desc`
         - sort by view_count: `?sort=view_count&order=asc` || `?sort=view_count&order=desc`
         - sort by sold_count: `?sort=sold_count&order=asc` || `?sort=sold_count&order=desc`
-
+        - paginate: `?paginate=20` || default 10
 -   Response:
     -   Status Code: `200 OK`
     -   Body: Array of product objects
