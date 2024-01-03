@@ -107,6 +107,8 @@ Authorization: Bearer <your_token_here>
         - sotr by name: `?sort=name&order=asc` || `?sort=name&order=desc`
         - sotr by created_at: `?sort=created_at&order=asc` || `?sort=created_at&order=desc`
         - sotr by updated_at: `?sort=updated_at&order=asc` || `?sort=updated_at&order=desc`
+        - sotr by regular_price: `?sort=regular_price&order=asc` || `?sort=regular_price&order=desc`
+        - sotr by sale_price: `?sort=sale_price&order=asc` || `?sort=sale_price&order=desc`
 
 -   Response:
     -   Status Code: `200 OK`
