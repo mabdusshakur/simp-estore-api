@@ -242,6 +242,9 @@ Authorization: Bearer <your_token_here>
 -   Method: `GET`
 -   Description: Retrieves a list of all Sub-Categories.
 -   Parameters: None
+    - Optional Query Parameters:
+        - search by name: `?search=sub_category_name`
+
 -   Response:
     -   Status Code: `200 OK`
     -   Body: Array of Sub-Categories objects
