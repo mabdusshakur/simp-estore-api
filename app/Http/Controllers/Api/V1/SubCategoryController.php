@@ -95,7 +95,11 @@ class SubCategoryController extends Controller
                 'slug' => Str::slug($request->name),
                 'category_id' => $request->category_id,
             ]);
-            return new SubCategoryResource([$subCategory, 'status' => 'success', 'message' => 'Category updated successfully']);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Sub Category Updated successfully',
+                'data' => new SubCategoryResource($subCategory),
+        ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
