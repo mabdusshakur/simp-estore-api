@@ -76,6 +76,13 @@ class OrderController extends Controller
                         'order' => $order,
                     ];
                     Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
+                    $admin_mail_data = [
+                        'subject' => 'new order notification',
+                        'email' =>auth()->user()->email,
+                        'name' => auth()->user()->name,
+                        'order_id' => $order->id,
+                    ];
+                    Mail::to(env('ADMIN_EMAIL'))->send(new \App\Mail\NewOrderNotifyMail($admin_mail_data));
                     return response()->json([
                             'status' => 'success',
                             'message' => 'Order created successfully',
@@ -144,6 +151,13 @@ class OrderController extends Controller
                                 'order' => $order,
                             ];
                             Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
+                            $admin_mail_data = [
+                                'subject' => 'new order notification',
+                                'email' =>auth()->user()->email,
+                                'name' => auth()->user()->name,
+                                'order_id' => $order->id,
+                            ];
+                            Mail::to(env('ADMIN_EMAIL'))->send(new \App\Mail\NewOrderNotifyMail($admin_mail_data));
                             return response()->json([
                                     'status' => 'success',
                                     'message' => 'Order created successfully',
@@ -232,6 +246,13 @@ class OrderController extends Controller
                 'order' => $order,
             ];
             Mail::to(auth()->user()->email)->send(new \App\Mail\OrderStatusMail($mail_data));
+            $admin_mail_data = [
+                'subject' => 'new order notification',
+                'email' =>auth()->user()->email,
+                'name' => auth()->user()->name,
+                'order_id' => $order->id,
+            ];
+            Mail::to(env('ADMIN_EMAIL'))->send(new \App\Mail\NewOrderNotifyMail($admin_mail_data));
             return response()->json([
                 'success' => true,
                 'order' => "Order created successfully, payment intent status : " . $paymentIntent->status,
