@@ -130,7 +130,7 @@ class ProductController extends Controller
                     ]);
                 }
             }
-            return new ProductResource([$product, 'status' => 'success', 'message' => 'Product updated successfully']);
+            return new ProductResource($product);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
