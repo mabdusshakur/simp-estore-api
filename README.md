@@ -131,6 +131,8 @@ Authorization: Bearer <your_token_here>
 
 #### Create Product (Authentication Required, Admin Only)
 
+-  Image Path: `you will find the image path in the response with double slash (//) so please remove one slash (/) from the image path`
+
 -   URL: `/products`
 -   Method: `POST`
 -   Description: Creates a new product.
