@@ -60,7 +60,7 @@ class ProductController extends Controller
             if($images){
                 foreach ($images as $image) {
                     $fileName = time() . '-' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
-                    $filePath = $image->move(public_path('images/product'), $fileName);
+                    $filePath = $image->move(public_path('images\product'), $fileName);
                     $product->images()->create([
                         'path' => $filePath,
                     ]);
@@ -124,7 +124,7 @@ class ProductController extends Controller
             if($images){
                 foreach ($images as $image) {
                     $fileName = time() . '-' . rand(1000, 9999) . '.' . $image->getClientOriginalExtension();
-                    $filePath = $image->move(public_path('images/product'), $fileName);
+                    $filePath = $image->move(public_path('images\product'), $fileName);
                     $product->images()->create([
                         'path' => $filePath,
                     ]);
