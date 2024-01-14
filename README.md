@@ -170,6 +170,8 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Updated product object
 
+** You can use POST method to update product as well if you have problem with PUT method form-data request.
+
 #### Delete Product (Authentication Required, Admin Only)
 
 -   URL: `/products/{id}`
