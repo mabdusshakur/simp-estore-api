@@ -49,7 +49,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::apiResource('sub-categories', \App\Http\Controllers\Api\v1\SubCategoryController::class);
             Route::apiResource('products', \App\Http\Controllers\Api\v1\ProductController::class);
             Route::post('products/{product}', [\App\Http\Controllers\Api\v1\ProductController::class, 'update']);
-            Route::post('products/delete-image', [\App\Http\Controllers\Api\v1\ProductController::class, 'deleteImage']);
+            Route::post('delete-product-image', [\App\Http\Controllers\Api\v1\ProductController::class, 'deleteImage']);
             Route::apiResource('orders', \App\Http\Controllers\Api\v1\OrderController::class);
         });
     });
