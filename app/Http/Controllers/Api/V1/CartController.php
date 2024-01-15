@@ -33,16 +33,21 @@ class CartController extends Controller
     {
         try {
             $request->validated();
-            $cart = Cart::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $request->product_id,
-                'quantity' => $request->quantity,
-            ]);
-            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart created successfully']);
+            $cart = Cart::updateOrCreate(
+                [
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $request->product_id,
+                ],
+                [
+                    'quantity' => $request->quantity,
+                ]
+            );
+            $message = $cart->wasRecentlyCreated ? 'Cart created successfully' : 'Cart updated successfully';
+            return new CartResource([$cart, 'status' => 'success', 'message' => $message]);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
