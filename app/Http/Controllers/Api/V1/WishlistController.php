@@ -33,11 +33,11 @@ class WishlistController extends Controller
     {
         try {
             $request->validated();
-            $wishlist = Wishlist::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $request->product_id,
-            ]);
-            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => 'Wishlist created successfully']);
+            $wishlist = Wishlist::updateOrCreate(
+                ['user_id' => auth()->user()->id, 'product_id' => $request->product_id]
+            );
+            $message = $wishlist->wasRecentlyCreated ? 'Wishlist created successfully' : 'Wishlist updated successfully';
+            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => $message ]);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
