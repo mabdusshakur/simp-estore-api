@@ -341,6 +341,18 @@ Authorization: Bearer <your_token_here>
     -   Status Code: `200 OK`
     -   Body: Wishlist created successfully
 
+#### Check if user already added the wishlist (Authentication Required)
+
+-   URL: `/wishlist-exists/{productId}`
+-   Method: `POST`
+-   Description: Checks if the user has already added a wishlist for the specified product.
+-   Route Parameters:
+    - `productId` (integer): The ID of the product to check.
+-   Response:
+    -   Status Code: `200 OK`
+    -   Body: JSON response indicating if the wishlist exists or not. Possible values are `true` or `false`.
+
+
 #### Delete Wishlist (Authentication Required)
 
 -   URL: `/api/wishlists/{id}`
