@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1'], function () {
         //wishlist
         Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
         Route::post('wishlists/destroy-all', [\App\Http\Controllers\Api\v1\WishlistController::class, 'destroyAll']);
+        Route::post('wishlist-exists/{productId}', [\App\Http\Controllers\Api\v1\WishlistController::class, 'checkIfWishlistExists']);
 
         //cart
         Route::apiResource('carts', \App\Http\Controllers\Api\v1\CartController::class);
