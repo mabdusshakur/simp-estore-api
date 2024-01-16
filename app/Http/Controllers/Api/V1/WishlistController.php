@@ -37,11 +37,11 @@ class WishlistController extends Controller
                 ['user_id' => auth()->user()->id, 'product_id' => $request->product_id]
             );
             $message = $wishlist->wasRecentlyCreated ? 'Wishlist created successfully' : 'Wishlist updated successfully';
-            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => $message ]);
+            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => $message]);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -55,8 +55,8 @@ class WishlistController extends Controller
             return new WishlistResource($wishlist);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -85,13 +85,13 @@ class WishlistController extends Controller
         try {
             $wishlist->delete();
             return response()->json([
-                    'status' => 'success',
-                    'message' => 'Wishlist deleted successfully',
+                'status' => 'success',
+                'message' => 'Wishlist deleted successfully',
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -105,13 +105,33 @@ class WishlistController extends Controller
         try {
             Wishlist::where('user_id', auth()->user()->id)->delete();
             return response()->json([
-                    'status' => 'success',
-                    'message' => 'All wishlist deleted successfully',
+                'status' => 'success',
+                'message' => 'All wishlist deleted successfully',
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                    'status' => 'error',
-                    'message' => $th->getMessage(),
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function checkIfWishlistExists($productId)
+    {
+        try {
+            $wishlist = Wishlist::where('user_id', auth()->user()->id)
+                ->where('product_id', $productId)
+                ->first();
+
+            if ($wishlist) {
+                return response()->json(true);
+            } else {
+                return response()->json(false);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
