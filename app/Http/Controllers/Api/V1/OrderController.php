@@ -47,7 +47,7 @@ class OrderController extends Controller
             $cartItems = Cart::where('user_id', auth()->user()->id)->get();
             $totalPrice = 0;
             foreach ($cartItems as $cartItem) {
-                $totalPrice += $cartItem->product->sale_price ?? $cartItem->product->regular_price * $cartItem->quantity;
+                $totalPrice += ($cartItem->product->sale_price ?? $cartItem->product->regular_price) * $cartItem->quantity;
             }
 
             if ($request->payment_method == 'cod') {
