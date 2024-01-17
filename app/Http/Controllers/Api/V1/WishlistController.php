@@ -37,7 +37,7 @@ class WishlistController extends Controller
                 ['user_id' => auth()->user()->id, 'product_id' => $request->product_id]
             );
             $message = $wishlist->wasRecentlyCreated ? 'Wishlist created successfully' : 'Wishlist updated successfully';
-            return new WishlistResource([$wishlist, 'status' => 'success', 'message' => $message]);
+            return new WishlistResource($wishlist);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
