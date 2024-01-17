@@ -43,7 +43,7 @@ class CartController extends Controller
                 ]
             );
             $message = $cart->wasRecentlyCreated ? 'Cart created successfully' : 'Cart updated successfully';
-            return new CartResource([$cart, 'status' => 'success', 'message' => $message]);
+            return new CartResource($cart);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
@@ -78,7 +78,7 @@ class CartController extends Controller
             $cart->update([
                 'quantity' => $request->quantity,
             ]);
-            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart updated successfully']);
+            return new CartResource($cart);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
@@ -96,7 +96,7 @@ class CartController extends Controller
             $cart->update([
                 'quantity' => $cart->quantity + 1,
             ]);
-            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item incremented successfully']);
+            return new CartResource($cart);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
@@ -117,7 +117,7 @@ class CartController extends Controller
                     'quantity' => $cart->quantity - 1,
                 ]);
             }
-            return new CartResource([$cart, 'status' => 'success', 'message' => 'Cart Item decremented successfully']);
+            return new CartResource($cart);
         } catch (\Throwable $th) {
             return response()->json([
                     'status' => 'error',
