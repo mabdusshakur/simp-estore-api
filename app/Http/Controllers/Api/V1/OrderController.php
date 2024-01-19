@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role == 'admin') {
+        if (auth()->user()->is_admin) {
             return OrderResource::collection(Order::all());
         } else {
             return OrderResource::collection(Order::where('user_id', auth()->user()->id)->get());
