@@ -52,6 +52,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('products/{product}', [\App\Http\Controllers\Api\v1\ProductController::class, 'update']);
             Route::post('delete-product-image', [\App\Http\Controllers\Api\v1\ProductController::class, 'deleteImage']);
             Route::apiResource('orders', \App\Http\Controllers\Api\v1\OrderController::class);
+            Route::post('update-order-status/{id}', [\App\Http\Controllers\Api\v1\OrderController::class, 'update']);
         });
     });
 });
