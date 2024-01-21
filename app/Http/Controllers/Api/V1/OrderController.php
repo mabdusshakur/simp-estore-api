@@ -295,16 +295,20 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         try {
-            $request->validated();
+            $validatedData = $request->validated();
             $order->update([
-                'status' => $request->status,
+                'status' => $validatedData['status'],
             ]);
-            $mail_data = [
-                'subject' => 'Order status updated',
-                'customer_name' => $order->user->name,
-                'order' => $order,
-            ];
-            Mail::to($order->user->email)->send(new \App\Mail\OrderStatusMail($mail_data));
+            try {
+                $mail_data = [
+                    'subject' => 'Order status updated',
+                    'customer_name' => $order->user->name,
+                    'order' => $order,
+                ];
+                Mail::to($order->user->email)->send(new \App\Mail\OrderStatusMail($mail_data));
+            } catch (\Throwable $th) {
+                // Handle mail sending error
+            }
             return response()->json([
                 'status' => 'success',
                 'message' => 'Order updated successfully',
@@ -317,7 +321,6 @@ class OrderController extends Controller
             ], 500);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */
