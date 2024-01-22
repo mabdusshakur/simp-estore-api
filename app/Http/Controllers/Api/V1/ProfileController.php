@@ -22,17 +22,12 @@ class ProfileController extends Controller
             $request->validated();
             $user = auth()->user();
 
-            if ($request->hasFile('avatar')) {
-                if (File::exists($user->avatar)) {
-                    unlink($user->avatar);
-                }
-                $request->validate(['avatar' => 'required|image|max:2048']);
-                $avatar = $request->file('avatar');
-                $avatarName = time() . '-' . rand(1000, 9999) . '.' . $avatar->getClientOriginalExtension();
-                $avatarPath = $avatar->move(public_path('images\user'), $avatarName);
-                $user->avatar = $avatarPath;
+            $avatar = $request->file('avatar');
+            if($avatar){
+                $fileName = time() . '-' . rand(1000, 9999) . '.' . $avatar->getClientOriginalExtension();
+                $filePath = $avatar->move(public_path('images\user'), $fileName);
+                $user->avatar = $filePath;
             }
-
             $user->update([
                 'name' => $request->name ?? $user->name,
                 'email' => $request->email ?? $user->email,
