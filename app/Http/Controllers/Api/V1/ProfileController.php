@@ -29,7 +29,7 @@ class ProfileController extends Controller
                 $request->validate(['avatar' => 'required|image|max:2048']);
                 $avatar = $request->file('avatar');
                 $avatarName = time() . '-' . rand(1000, 9999) . '.' . $avatar->getClientOriginalExtension();
-                $avatarPath = $avatar->move(public_path('images/user'), $avatarName);
+                $avatarPath = $avatar->move(public_path('images\user'), $avatarName);
                 $user->avatar = $avatarPath;
             }
 
