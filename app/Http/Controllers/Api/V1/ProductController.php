@@ -23,6 +23,10 @@ class ProductController extends Controller
     {
         $products = Product::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->search}%")->orWhere('description', 'like', "%{$request->search}%");
+        })->when($request->category_id, function ($query) use ($request) {
+            $query->where('category_id', $request->category_id);
+        })->when($request->subcategory_id, function ($query) use ($request) {
+            $query->where('subcategory_id', $request->subcategory_id);
         })->when($request->sort, function ($query) use ($request) {
             $query->orderBy($request->sort, $request->order);
         })->paginate($request->paginate ?? 10);
