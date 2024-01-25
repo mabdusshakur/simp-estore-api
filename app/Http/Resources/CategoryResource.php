@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\SubCategory;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,6 +22,7 @@ class CategoryResource extends JsonResource
             'products_count' => $this->products_count,
             'sub_categories_count' => $this->sub_categories_count,
             'sub_categories' => SubCategoryResource::collection(SubCategory::where('category_id', $this->id)->get()),
+            'products' => ProductResource::collection(Product::where('category_id', $this->id)->get()),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

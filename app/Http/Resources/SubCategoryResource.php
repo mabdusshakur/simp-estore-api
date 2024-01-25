@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,14 @@ class SubCategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name ?? '',
+            'slug' => $this->slug ?? '',
+            'created_at' => $this->created_at ?? '',
+            'updated_at' => $this->updated_at ?? '',
+            'category' => new CategoryResource($this->category),
+            'products' => ProductResource::collection(Product::where('subcategory_id', $this->id)->get()),
+        ];
     }
 }
