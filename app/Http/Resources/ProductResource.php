@@ -28,8 +28,8 @@ class ProductResource extends JsonResource
             'view_count' => $this->view_count ?? '',
             'sold_count' => $this->sold_count ?? '',
             'images' => ImageResource::collection($this->images),
-            'category' => new CategoryResource($this->category),
-            'subcategory' => new SubCategoryResource($this->subcategory),
+            // 'category' => new CategoryResource($this->category),
+            // 'subcategory' => new SubCategoryResource($this->subcategory),
         ];
     }
 }
