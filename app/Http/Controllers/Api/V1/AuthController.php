@@ -44,14 +44,20 @@ class AuthController extends Controller
                 'name' => $user->name,
             ]));
 
-            $token = $user->createToken('registerToken')->plainTextToken;
+            // Create access token (30 minutes)
+            $accessToken = $user->createToken('access_token', ['*'], now()->addMinutes(30))->plainTextToken;
+            
+            // Create refresh token (2 hours)
+            $refreshToken = $user->createToken('refresh_token', ['refresh'], now()->addHours(2))->plainTextToken;
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'User created successfully',
                 'user' => $user,
-                'token' => $token,
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
                 'token_type' => 'Bearer',
+                'expires_in' => 1800, // 30 minutes in seconds
             ], 201);
         } catch (\Throwable $th) {
             return response()->json([
@@ -87,13 +93,20 @@ class AuthController extends Controller
             }
 
             $user = $request->user();
-            $token = $user->createToken('loginToken')->plainTextToken;
+            
+            // Create access token (30 minutes)
+            $accessToken = $user->createToken('access_token', ['*'], now()->addMinutes(30))->plainTextToken;
+            
+            // Create refresh token (2 hours)
+            $refreshToken = $user->createToken('refresh_token', ['refresh'], now()->addHours(2))->plainTextToken;
 
             return response()->json([
                 'status' => 'success',
                 'user' => $user,
-                'token' => $token,
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
                 'token_type' => 'Bearer',
+                'expires_in' => 1800, // 30 minutes in seconds
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -108,5 +121,86 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
         return response()->noContent();
+    }
+
+    /**
+     * Verify the current token and return user information
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verifyToken()
+    {
+        try {
+            $user = auth()->user();
+            
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid or expired token',
+                ], 401);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Token is valid',
+                'user' => $user,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Refresh tokens by revoking current refresh token and creating new access and refresh tokens
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refreshToken()
+    {
+        try {
+            $user = auth()->user();
+            
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid or expired token',
+                ], 401);
+            }
+
+            // Check if the current token has refresh ability
+            if (!$user->tokenCan('refresh')) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'This token cannot be used to refresh. Please use a refresh token.',
+                ], 403);
+            }
+
+            // Revoke the current refresh token
+            $user->currentAccessToken()->delete();
+
+            // Create new access token (30 minutes) with reset expiration
+            $accessToken = $user->createToken('access_token', ['*'], now()->addMinutes(30))->plainTextToken;
+            
+            // Create new refresh token (2 hours) with reset expiration
+            $refreshToken = $user->createToken('refresh_token', ['refresh'], now()->addHours(2))->plainTextToken;
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Token refreshed successfully',
+                'user' => $user,
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
+                'token_type' => 'Bearer',
+                'expires_in' => 1800, // 30 minutes in seconds
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 500);
+        }
     }
 }

@@ -21,6 +21,8 @@ Route::group(['prefix' => 'v1'], function () {
     
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('verify-token', [AuthController::class, 'verifyToken'])->name('verify-token');
+        Route::post('refresh-token', [AuthController::class, 'refreshToken'])->name('refresh-token');
 
         //wishlist
         Route::apiResource('wishlists', \App\Http\Controllers\Api\v1\WishlistController::class);
